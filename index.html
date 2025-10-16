@@ -24,50 +24,65 @@
   </head>
   <body>
     <header class="fixed-top bg-white shadow-sm">
-      <div class="container py-2">
-        <nav class="navbar navbar-expand-lg">
-          <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-              <img
-                src="Imagenes/Logo_Renta.jpg"
-                alt="Logo RentaAutos"
-                class="logo-img me-2"
-              />
-              <span class="fw-bold text-success">RentaAutos</span>
-            </a>
+      <div class="container-fluid px-4">
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <img
+              src="Imagenes/Logo_Renta.jpg"
+              alt="Logo RentaAutos"
+              class="logo-img me-2"
+            />
+            <span class="fw-bold text-success fs-5">RentaAutos</span>
+          </a>
 
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
+          <button
+            class="navbar-toggler border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <div
+              class="d-flex align-items-center justify-content-end gap-1 ms-lg-auto"
+              style="padding-right: 0"
             >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav mx-auto">
+              <ul
+                class="navbar-nav mb-2 mb-lg-0 d-flex flex-row align-items-center gap-0"
+                style="margin-bottom: 0"
+              >
                 <li class="nav-item">
-                  <a class="nav-link" href="#inicio">Inicio</a>
+                  <a class="nav-link px-1" href="#inicio">Inicio</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#flota">Flota</a>
+                  <a class="nav-link px-1" href="#flota">Flota</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#sucursales">Sucursales</a>
+                  <a class="nav-link px-1" href="#sucursales">Sucursales</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#tarifas">Tarifas</a>
+                  <a class="nav-link px-1" href="#tarifas">Tarifas</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/acerca-de.html">Acerca de</a>
+                  <a class="nav-link px-1" href="pages/acerca-de.html"
+                    >Acerca de</a
+                  >
                 </li>
               </ul>
-
-              <div class="d-flex gap-2">
-                <a href="#" class="btn btn-success">Login</a>
-                <a href="#" class="btn btn-outline-success">Registrarse</a>
-              </div>
+              <button
+                type="button"
+                class="btn btn-success px-2 py-1 ms-1"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal"
+                style="font-size: 0.93rem"
+              >
+                <i class="fas fa-user me-2"></i>Iniciar sesión
+              </button>
             </div>
           </div>
         </nav>
@@ -752,40 +767,102 @@
     <footer class="bg-dark text-white py-5">
       <div class="container">
         <div class="row gy-4">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <h3 class="text-success mb-3">RentaAutos</h3>
             <p>
               La mejor opción en alquiler de vehículos con más de 5 años de
               experiencia en el mercado.
             </p>
-            <div class="d-flex gap-3">
+            <div class="d-flex gap-3 mt-3">
               <a
-                href="https://www.facebook.com/share/1ABuYDnrZy/?mibextid=wwXIfr"
-                class="text-white"
+                href="https://www.facebook.com/profile.php?id=100064032654738"
+                class="text-white fs-4"
+                target="_blank"
+                rel="noopener noreferrer"
                 ><i class="fab fa-facebook-f"></i
               ></a>
               <a
                 href="https://www.tiktok.com/@rentaautostulua?_t=ZS-8zmPbGOc43j&_r=1"
-                class="text-white"
+                class="text-white fs-4"
+                target="_blank"
+                rel="noopener noreferrer"
                 ><i class="fab fa-tiktok"></i
               ></a>
               <a
                 href="https://www.instagram.com/rentaautostulua?igsh=MW1waHp3aW5saTc5ZA=="
-                class="text-white"
+                class="text-white fs-4"
+                target="_blank"
+                rel="noopener noreferrer"
                 ><i class="fab fa-instagram"></i
               ></a>
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-4">
             <h3 class="text-success mb-3">Contáctanos</h3>
             <p><i class="fas fa-envelope me-2"></i> rentaauto@gmail.com</p>
             <p>
               <i class="fas fa-envelope me-2"></i> soportetucodigo@gmail.com
             </p>
-            <a href="pages/leyes.html" class="btn btn-outline-light"
+            <a href="pages/leyes.html" class="btn btn-outline-light btn-sm"
               >Ver Leyes y Normativas</a
             >
+          </div>
+
+          <div class="col-md-4">
+            <h3 class="text-success mb-3">Desarrolladores</h3>
+            <p class="mb-2">
+              <i class="fas fa-code me-2"></i>
+              <strong>Equipo de Desarrollo</strong>
+            </p>
+            <div class="mb-2">
+              <i class="fab fa-github me-2"></i>
+              <a
+                href="https://github.com/cristianhoyos01-bit"
+                class="text-white text-decoration-none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cristian Hoyos
+              </a>
+            </div>
+            <div class="mb-2">
+              <i class="fab fa-github me-2"></i>
+              <a
+                href="https://github.com/juanfer2806"
+                class="text-white text-decoration-none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Juan Fernando Ramirez
+              </a>
+            </div>
+            <div class="mb-2">
+              <i class="fab fa-github me-2"></i>
+              <a
+                href="https://github.com/kavila-code"
+                class="text-white text-decoration-none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Kelly Ávila
+              </a>
+            </div>
+            <div class="mb-2">
+              <i class="fab fa-github me-2"></i>
+              <a
+                href="https://github.com/juansalazar10"
+                class="text-white text-decoration-none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Juan David Salazar
+              </a>
+            </div>
+            <p class="mb-0 text-white-50 small mt-2">
+              Desarrollado con <i class="fas fa-heart text-danger"></i> para
+              RentaAutos
+            </p>
           </div>
         </div>
 
@@ -796,6 +873,89 @@
         </div>
       </div>
     </footer>
+
+    <!-- Modal: Login -->
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Iniciar sesión</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="loginForm" action="#" method="post" novalidate>
+              <div class="mb-3">
+                <label for="loginEmail" class="form-label"
+                  >Correo electrónico</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="loginEmail"
+                  name="email"
+                  placeholder="tucorreo@ejemplo.com"
+                  required
+                />
+                <div class="form-text">
+                  Nunca compartiremos tu correo con nadie.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="loginPassword" class="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginPassword"
+                  name="password"
+                  placeholder="Tu contraseña"
+                  required
+                />
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="1"
+                    id="rememberMe"
+                    name="remember"
+                  />
+                  <label class="form-check-label" for="rememberMe"
+                    >Recordarme</label
+                  >
+                </div>
+                <a href="#" class="small">¿Olvidaste tu contraseña?</a>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-success" form="loginForm">
+              Entrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
