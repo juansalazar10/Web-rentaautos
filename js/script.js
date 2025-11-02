@@ -64,3 +64,25 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(card);
     });
 });
+
+// Manejar submit del formulario de login para cerrar la modal inmediatamente
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    if (!loginForm) return;
+
+    loginForm.addEventListener('submit', function(e) {
+        // Prevenir comportamiento por defecto (evita recarga y posibles delays)
+        e.preventDefault();
+
+        // Aquí podrías agregar validación o mostrar un spinner mientras autenticas.
+        const loginModalEl = document.getElementById('loginModal');
+        if (loginModalEl) {
+            // Usar la API de Bootstrap para cerrar la modal
+            const modalInstance = bootstrap.Modal.getOrCreateInstance(loginModalEl);
+            modalInstance.hide();
+        }
+
+        // Simular respuesta rápida: mostrar mensaje temporal (opcional)
+        // Puedes reemplazar esto por una llamada fetch(...) real a tu backend.
+    });
+});
