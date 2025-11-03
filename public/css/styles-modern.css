@@ -1,0 +1,915 @@
+/* ====================================
+   VARIABLES MODERNAS
+   ==================================== */
+:root {
+    --primary-color: #28a745;
+    --primary-hover: #218838;
+    --primary-light: #34d058;
+    --dark: #1a1a1a;
+    --dark-soft: #2d3436;
+    --light: #f8f9fa;
+    --gray-100: #f1f3f5;
+    --gray-200: #e9ecef;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
+    --shadow-xl: 0 20px 48px rgba(0,0,0,0.16);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    /* reducido para navbar más compacta */
+    padding-top: 68px;
+    line-height: 1.7;
+    color: var(--dark-soft);
+    background-color: #ffffff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ====================================
+   BOTONES MODERNOS
+   ==================================== */
+.btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-radius: 12px;
+    padding: 0.75rem 1.8rem;
+    border: 2px solid transparent;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(40, 167, 69, 0.25);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    border: none;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+}
+
+.btn-outline-success {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+}
+
+.btn-outline-success:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* ====================================
+   HEADER MODERNO CON GLASSMORPHISM
+   ==================================== */
+header {
+    backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-bottom: 1px solid rgba(40, 167, 69, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+header.scrolled {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.98) !important;
+}
+
+.logo-img {
+    /* logo más pequeño para una navbar compacta */
+    height: 56px;
+    width: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    /* dejar margen reducido en el logo para que no desplace el layout */
+    margin-left: 12px;
+}
+
+.logo-img:hover {
+    transform: scale(1.08) rotate(2deg);
+}
+
+.navbar-brand {
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* mantener pequeño padding en el brand; el espacio extra lo maneja el logo */
+    padding-left: 0.5rem;
+}
+
+.navbar.navbar-expand-lg {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+}
+
+
+header .container-fluid {
+   
+    /* devolver a padding moderado para no desordenar el layout */
+    padding-left: 1.25rem; 
+    padding-right: 1.25rem;
+}
+
+/* ====================================
+   NAVEGACIÓN MODERNA
+   ==================================== */
+.navbar-nav {
+    gap: 0.3rem;
+}
+
+/* Ensure nav items vertically centered and more consistent spacing */
+.navbar {
+    min-height: 64px;
+}
+
+.navbar .navbar-nav {
+    align-items: center;
+}
+
+.navbar-nav {
+    gap: 0.6rem;
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    /* padding reducido para una apariencia más compacta */
+    padding: 0.45rem 0.9rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    color: var(--dark-soft);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.navbar-nav .nav-link::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 8px;
+    left: 50%;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.navbar-nav .nav-link:hover::before {
+    width: 70%;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--primary-color) !important;
+    background-color: rgba(40, 167, 69, 0.06);
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--primary-color);
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.navbar-nav .nav-link.active::before {
+    width: 70%;
+}
+
+/* ====================================
+   HERO SECTION MODERNA
+   ==================================== */
+.hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 50%, #1a1a1a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fine-tune hero spacing so content doesn't sit under the fixed header */
+.hero {
+    padding-top: 4.5rem; /* keeps hero vertical rhythm */
+    padding-bottom: 4.5rem;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(40, 167, 69, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(40, 167, 69, 0.1) 0%, transparent 50%);
+    animation: pulse 15s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero h2 {
+    font-size: 2.8rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.hero-image {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 44%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 24px 0 0 24px;
+    box-shadow: -8px 8px 32px rgba(0, 0, 0, 0.4);
+    filter: brightness(1.05) contrast(1.1);
+    animation: slideInRight 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+/* ====================================
+   SECCIONES MODERNAS
+   ==================================== */
+section {
+    /* mantener consistencia con la altura reducida del header */
+    scroll-margin-top: 68px;
+    padding: 5rem 0;
+}
+
+section h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: 2px;
+}
+
+/* ====================================
+   TARJETAS DE VEHÍCULOS MODERNAS
+   ==================================== */
+.vehicle-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.vehicle-card:hover {
+    transform: translateY(-12px);
+    box-shadow: var(--shadow-xl);
+}
+
+.vehicle-card .card-img-top {
+    height: 240px;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vehicle-card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+.vehicle-card .card-body {
+    padding: 1.4rem;
+}
+
+.vehicle-card .card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.vehicle-card ul {
+    font-size: 0.92rem;
+    margin: 1.5rem 0;
+}
+
+.vehicle-card ul li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vehicle-card ul li i {
+    width: 20px;
+}
+
+.vehicle-card .h5 {
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+/* ====================================
+   TARJETAS DE SUCURSALES
+   ==================================== */
+.branch-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+}
+
+.branch-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.branch-card:hover::before {
+    transform: scaleX(1);
+}
+
+.branch-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.branch-card .card-body {
+    padding: 2rem;
+}
+
+.branch-card i.fa-3x {
+    transition: transform 0.3s ease;
+}
+
+.branch-card:hover i.fa-3x {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* ====================================
+   TARJETAS DE PRECIOS MODERNAS
+   ==================================== */
+.pricing-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--gray-200);
+    border-radius: 24px;
+    overflow: hidden;
+    background: white;
+    position: relative;
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(52, 208, 88, 0.05));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.pricing-card:hover::before {
+    opacity: 1;
+}
+
+.pricing-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-color);
+}
+
+.pricing-card .card-header {
+    font-weight: 700;
+    padding: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.pricing-card .card-body {
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.pricing-card.border-success {
+    border: 3px solid var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.pricing-card .display-4 {
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+/* ====================================
+   SECCIÓN SERVICIOS
+   ==================================== */
+#services img {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 420px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 20px;
+}
+
+#services img:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-xl);
+}
+
+#services h3 {
+    position: relative;
+    padding-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+#services h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: 2px;
+}
+
+/* ====================================
+   FOOTER MODERNO
+   ==================================== */
+footer {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%);
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-links a:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    transform: translateY(-5px) rotate(5deg);
+    box-shadow: 0 8px 16px rgba(40, 167, 69, 0.3);
+    border-color: var(--primary-color);
+}
+
+/* ====================================
+   ANIMACIONES
+   ==================================== */
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* ====================================
+   SCROLL SUAVE
+   ==================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enlace para saltar al contenido (accesibilidad) */
+.skip-link {
+    position: fixed;
+    left: 12px;
+    top: 10px;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    z-index: 1100;
+    transform: translateY(-120%);
+    transition: transform 0.22s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+    outline: 3px solid rgba(255,255,255,0.12);
+}
+
+/* Formulario de reserva en hero (estilo compacto) */
+.reservation-form .form-control,
+.reservation-form .form-select {
+    border-radius: 10px;
+}
+
+.reservation-form .btn {
+    border-radius: 10px;
+}
+
+/* ====================================
+   UTILIDADES
+   ==================================== */
+.text-success {
+    color: var(--primary-color) !important;
+}
+
+.bg-success {
+    background-color: var(--primary-color) !important;
+}
+
+.bg-light {
+    background-color: var(--gray-100) !important;
+}
+
+/* ====================================
+   RESPONSIVE DESIGN
+   ==================================== */
+@media (max-width: 991.98px) {
+    .hero {
+        text-align: center;
+        background: linear-gradient(135deg, #1a1a1a, #2d3436);
+    }
+    
+    .hero-image {
+        display: none;
+    }
+    
+    .hero h1 {
+        font-size: 3rem;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    section h2 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    body {
+        /* ajuste móvil acorde a header compacto */
+        padding-top: 60px;
+    }
+    /* en móvil mantenemos separación cómoda (24px) */
+    header .container-fluid {
+        padding-left: 20px;
+        padding-right: 24px;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.6rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.3rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ====================================
+   EFECTOS ESPECIALES
+   ==================================== */
+.container {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Badge especial */
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+}
+
+/* Alertas modernas */
+.alert {
+    border-radius: 16px;
+    border: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
+    border-left: 4px solid #3498db;
+}
+
+/* Feature items en hero */
+.feature-item {
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateX(5px);
+}
+
+/* Lead text mejorado */
+.lead {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+/* Botón outline light */
+.btn-outline-light {
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: white;
+    background: transparent;
+}
+
+.btn-outline-light:hover {
+    background: white;
+    color: var(--dark);
+    border-color: white;
+}
+
+/* botones en la cabecera (más compactos que el estilo global) */
+header .btn {
+    padding: 0.42rem 0.9rem;
+    font-size: 0.88rem;
+    border-radius: 10px;
+}
+
+/* Mejor contraste para texto muted */
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Sombra suave para imágenes */
+.shadow {
+    box-shadow: var(--shadow-md) !important;
+}
+
+.shadow-sm {
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Rounded mejorado */
+.rounded {
+    border-radius: 16px !important;
+}
+
+/* Card mejoradas */
+.card {
+    border: none;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+/* Font weight utilities */
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+/* Iconos con mejor estilo */
+.fa-check-circle {
+    filter: drop-shadow(0 2px 4px rgba(40, 167, 69, 0.3));
+}
+
+/* =============================
+   MODAL: LOGIN (mejoras visuales)
+   ============================= */
+/* Limitar ancho del diálogo y hacerlo más card-like */
+.modal-dialog {
+    max-width: 440px;
+}
+
+.modal-content {
+    border-radius: 16px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(18, 18, 18, 0.25);
+    background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(250,250,250,0.98) 100%);
+}
+
+.modal-header {
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(90deg, rgba(40,167,69,0.95), rgba(52,208,88,0.95));
+    color: #fff;
+    border-bottom: none;
+}
+
+.modal-header .btn-close {
+    filter: brightness(1.2) invert(1) opacity(0.9);
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    border: none;
+    width: 38px;
+    height: 38px;
+}
+
+.modal-title {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    font-size: 1.05rem;
+}
+
+.modal-body {
+    padding: 1.25rem 1.5rem 1rem 1.5rem;
+}
+
+.modal-body .form-control {
+    border-radius: 10px;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 6px 18px rgba(17, 24, 39, 0.03) inset;
+    transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.modal-body .form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 6px 24px rgba(40,167,69,0.07);
+}
+
+.modal-footer {
+    padding: 0.85rem 1.5rem 1.25rem 1.5rem;
+    border-top: none;
+    background: transparent;
+}
+
+.modal-footer .btn-success {
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.modal-footer .btn-outline-secondary {
+    border-radius: 12px;
+    padding: 0.56rem 1rem;
+}
+
+/* Backdrop más suave y con blur (si el navegador lo soporta) */
+.modal-backdrop.show {
+    background-color: rgba(0,0,0,0.38);
+    backdrop-filter: blur(4px) saturate(120%);
+}
+
+/* Responsive: reducir ancho en pantallas pequeñas */
+@media (max-width: 575.98px) {
+    .modal-dialog {
+        max-width: 92%;
+        margin: 1.5rem;
+    }
+    .modal-header, .modal-body, .modal-footer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* =============================
+   Ajustes seguros para el modal de login
+   (evitar forzar `position` o `transform` en .modal.show para no romper
+   las transiciones de Bootstrap). Mantener ancho máximo y transiciones.
+   ============================= */
+#loginModal .modal-dialog {
+    max-width: 440px; /* ya definido en .modal-dialog pero reforzamos */
+    margin: 1.25rem auto;
+    transition: transform 0.28s ease, top 0.28s ease;
+}
+
+@media (min-width: 768px) {
+    /* en pantallas grandes mantenemos un poco más cerca del top */
+    #loginModal .modal-dialog {
+        margin-top: 1rem;
+    }
+}

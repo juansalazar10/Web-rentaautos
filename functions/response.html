@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RentaAutos - Inicio</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles-modern.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <header class="fixed-top bg-white shadow-sm">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <img
+              src="Imagenes/Logo_Renta.jpg"
+              alt="Logo RentaAutos"
+              class="logo-img me-2"
+            />
+            <span class="fw-bold text-success fs-5">RentaAutos</span>
+          </a>
+
+          <button
+            class="navbar-toggler border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <div
+              class="d-flex align-items-center justify-content-end gap-1 ms-lg-auto"
+              style="padding-right: 0"
+            >
+              <ul
+                class="navbar-nav mb-2 mb-lg-0 d-flex flex-row align-items-center gap-0"
+                style="margin-bottom: 0"
+              >
+                <li class="nav-item">
+                  <a class="nav-link px-1" href="#inicio">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-1" href="#flota">Flota</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-1" href="#sucursales">Sucursales</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-1" href="#tarifas">Tarifas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-1" href="pages/acerca-de.html"
+                    >Acerca de</a
+                  >
+                </li>
+              </ul>
+              <button
+                type="button"
+                class="btn btn-success px-2 py-1 ms-1"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal"
+                style="font-size: 0.93rem"
+              >
+                <i class="fas fa-user me-2"></i>Iniciar sesión
+              </button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" role="main">
+      <section
+        id="inicio"
+        role="region"
+        aria-label="Inicio"
+        class="hero min-vh-100 d-flex align-items-center bg-dark text-white position-relative"
+      >
+        <div class="container py-5 mt-5">
+          <div class="row">
+            <div class="col-lg-6">
+              <h1 class="display-3 fw-bold mb-3">RENTAAUTOS</h1>
+              <h2 class="h2 text-success mb-4">TULUÁ - Valle del Cauca</h2>
+              <p class="lead mb-5 text-white-50">
+                Tu mejor opción para rentar vehículos con la más alta calidad y
+                servicio personalizado
+              </p>
+
+              <div class="row g-3 mb-5">
+                <div class="col-6 col-md-4">
+                  <div class="d-flex align-items-center feature-item">
+                    <i class="fas fa-check-circle text-success me-2 fs-5"></i>
+                    <span class="fw-500">Flexibilidad</span>
+                  </div>
+                </div>
+                <div class="col-6 col-md-4">
+                  <div class="d-flex align-items-center feature-item">
+                    <i class="fas fa-check-circle text-success me-2 fs-5"></i>
+                    <span class="fw-500">Atención 24/7</span>
+                  </div>
+                </div>
+                <div class="col-6 col-md-4">
+                  <div class="d-flex align-items-center feature-item">
+                    <i class="fas fa-check-circle text-success me-2 fs-5"></i>
+                    <span class="fw-500">Seguridad</span>
+                  </div>
+                </div>
+                <div class="col-6 col-md-4">
+                  <div class="d-flex align-items-center feature-item">
+                    <i class="fas fa-check-circle text-success me-2 fs-5"></i>
+                    <span class="fw-500">Comodidad</span>
+                  </div>
+                </div>
+                <div class="col-6 col-md-4">
+                  <div class="d-flex align-items-center feature-item">
+                    <i class="fas fa-check-circle text-success me-2 fs-5"></i>
+                    <span class="fw-500">Facilidad</span>
+                  </div>
+                </div>
+                <div class="col-6 col-md-4">
+                  <div class="d-flex align-items-center feature-item">
+                    <i class="fas fa-check-circle text-success me-2 fs-5"></i>
+                    <span class="fw-500">Accesible</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3 flex-wrap">
+                <a href="#flota" class="btn btn-success btn-lg">
+                  <i class="fas fa-car me-2"></i>Ver Vehículos Disponibles
+                </a>
+                <a href="#tarifas" class="btn btn-outline-light btn-lg">
+                  <i class="fas fa-calculator me-2"></i>Ver Tarifas
+                </a>
+              </div>
+
+              <!-- Formulario compacto de reserva (solo UI) -->
+              <form
+                class="reservation-form row g-2 align-items-center mt-4"
+                action="#"
+                onsubmit="return false;"
+                aria-label="Formulario de reserva"
+              >
+                <div class="col-auto">
+                  <input
+                    type="date"
+                    class="form-control"
+                    aria-label="Fecha inicio"
+                    name="pickup_date"
+                  />
+                </div>
+                <div class="col-auto">
+                  <input
+                    type="date"
+                    class="form-control"
+                    aria-label="Fecha retorno"
+                    name="return_date"
+                  />
+                </div>
+                <div class="col-auto">
+                  <select
+                    class="form-select"
+                    aria-label="Tipo de vehículo"
+                    name="vehicle_type"
+                  >
+                    <option value="">Tipo vehículo</option>
+                    <option value="sedan">Sedán</option>
+                    <option value="suv">SUV</option>
+                    <option value="pickup">Pickup</option>
+                    <option value="van">Van</option>
+                  </select>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-success" type="submit">Buscar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <img
+          src="Imagenes/Carro_principal.webp"
+          alt="Imagen principal"
+          class="hero-image d-none d-lg-block"
+        />
+      </section>
+
+      <!-- Sección Flota -->
+      <section
+        id="flota"
+        role="region"
+        aria-label="Flota"
+        class="py-5 bg-light"
+      >
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="fw-bold">Vehículos de Primera Calidad</h2>
+            <p class="text-muted fs-5 mt-3">
+              Contamos con una amplia variedad de vehículos modernos y bien
+              mantenidos<br />
+              para satisfacer todas tus necesidades de movilidad
+            </p>
+          </div>
+
+          <div class="row g-4">
+            <!-- Vehículo 1 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm vehicle-card">
+                <img
+                  src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500"
+                  class="card-img-top"
+                  alt="Sedán Compacto"
+                />
+                <div class="card-body">
+                  <h5 class="card-title text-success">Sedán Compacto</h5>
+                  <p class="card-text">
+                    Ideal para ciudad, económico y cómodo para 4 pasajeros.
+                  </p>
+                  <ul class="list-unstyled">
+                    <li>
+                      <i class="fas fa-users text-success"></i> 4 pasajeros
+                    </li>
+                    <li>
+                      <i class="fas fa-suitcase text-success"></i> 2 maletas
+                    </li>
+                    <li>
+                      <i class="fas fa-cog text-success"></i> Transmisión
+                      automática
+                    </li>
+                  </ul>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="h5 text-success mb-0">$80.000/día</span>
+                    <a href="#tarifas" class="btn btn-success btn-sm"
+                      >Reservar</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vehículo 2 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm vehicle-card">
+                <img
+                  src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=500"
+                  class="card-img-top"
+                  alt="SUV"
+                />
+                <div class="card-body">
+                  <h5 class="card-title text-success">SUV Familiar</h5>
+                  <p class="card-text">
+                    Espacioso y versátil, perfecto para viajes familiares.
+                  </p>
+                  <ul class="list-unstyled">
+                    <li>
+                      <i class="fas fa-users text-success"></i> 7 pasajeros
+                    </li>
+                    <li>
+                      <i class="fas fa-suitcase text-success"></i> 4 maletas
+                    </li>
+                    <li>
+                      <i class="fas fa-cog text-success"></i> Transmisión
+                      automática
+                    </li>
+                  </ul>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="h5 text-success mb-0">$150.000/día</span>
+                    <a href="#tarifas" class="btn btn-success btn-sm"
+                      >Reservar</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vehículo 3 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm vehicle-card">
+                <img
+                  src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=500"
+                  class="card-img-top"
+                  alt="Camioneta"
+                />
+                <div class="card-body">
+                  <h5 class="card-title text-success">Camioneta Pickup</h5>
+                  <p class="card-text">
+                    Para trabajo o aventura, potente y resistente.
+                  </p>
+                  <ul class="list-unstyled">
+                    <li>
+                      <i class="fas fa-users text-success"></i> 5 pasajeros
+                    </li>
+                    <li>
+                      <i class="fas fa-suitcase text-success"></i> Carga amplia
+                    </li>
+                    <li>
+                      <i class="fas fa-cog text-success"></i> Transmisión
+                      manual/automática
+                    </li>
+                  </ul>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="h5 text-success mb-0">$120.000/día</span>
+                    <a href="#tarifas" class="btn btn-success btn-sm"
+                      >Reservar</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vehículo 4 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm vehicle-card">
+                <img
+                  src="https://images.unsplash.com/photo-1580414057403-c5f451f30dfe?w=500"
+                  class="card-img-top"
+                  alt="Sedán Ejecutivo"
+                />
+                <div class="card-body">
+                  <h5 class="card-title text-success">Sedán Ejecutivo</h5>
+                  <p class="card-text">
+                    Elegancia y confort para viajes de negocios.
+                  </p>
+                  <ul class="list-unstyled">
+                    <li>
+                      <i class="fas fa-users text-success"></i> 5 pasajeros
+                    </li>
+                    <li>
+                      <i class="fas fa-suitcase text-success"></i> 3 maletas
+                    </li>
+                    <li>
+                      <i class="fas fa-cog text-success"></i> Transmisión
+                      automática
+                    </li>
+                  </ul>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="h5 text-success mb-0">$180.000/día</span>
+                    <a href="#tarifas" class="btn btn-success btn-sm"
+                      >Reservar</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vehículo 5 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm vehicle-card">
+                <img
+                  src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=500"
+                  class="card-img-top"
+                  alt="Deportivo"
+                />
+                <div class="card-body">
+                  <h5 class="card-title text-success">Deportivo</h5>
+                  <p class="card-text">
+                    Para quienes buscan estilo y rendimiento superior.
+                  </p>
+                  <ul class="list-unstyled">
+                    <li>
+                      <i class="fas fa-users text-success"></i> 2 pasajeros
+                    </li>
+                    <li>
+                      <i class="fas fa-suitcase text-success"></i> 2 maletas
+                    </li>
+                    <li>
+                      <i class="fas fa-cog text-success"></i> Transmisión
+                      automática
+                    </li>
+                  </ul>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="h5 text-success mb-0">$250.000/día</span>
+                    <a href="#tarifas" class="btn btn-success btn-sm"
+                      >Reservar</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vehículo 6 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm vehicle-card">
+                <img
+                  src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=500"
+                  class="card-img-top"
+                  alt="Van"
+                />
+                <div class="card-body">
+                  <h5 class="card-title text-success">Van Pasajeros</h5>
+                  <p class="card-text">Máxima capacidad para grupos grandes.</p>
+                  <ul class="list-unstyled">
+                    <li>
+                      <i class="fas fa-users text-success"></i> 12 pasajeros
+                    </li>
+                    <li>
+                      <i class="fas fa-suitcase text-success"></i> 6 maletas
+                    </li>
+                    <li>
+                      <i class="fas fa-cog text-success"></i> Transmisión manual
+                    </li>
+                  </ul>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="h5 text-success mb-0">$200.000/día</span>
+                    <a href="#tarifas" class="btn btn-success btn-sm"
+                      >Reservar</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Sucursales -->
+      <section
+        id="sucursales"
+        role="region"
+        aria-label="Sucursales"
+        class="py-5"
+      >
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="fw-bold">Nuestras Sucursales</h2>
+            <p class="text-muted fs-5 mt-3">
+              Encuentra la sucursal más cercana a ti y visítanos
+            </p>
+          </div>
+
+          <div class="row g-4">
+            <!-- Sucursal Principal -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm branch-card">
+                <div class="card-body">
+                  <div class="text-center mb-3">
+                    <i class="fas fa-map-marker-alt fa-3x text-success"></i>
+                  </div>
+                  <h5 class="card-title text-center text-success">
+                    Sucursal Centro - Tuluá
+                  </h5>
+                  <hr />
+                  <p class="mb-2">
+                    <i class="fas fa-location-dot text-success me-2"></i>
+                    <strong>Dirección:</strong><br />
+                    <span class="ms-4"
+                      >Carrera 26 # 25-71, Centro, Tuluá, Valle del Cauca</span
+                    >
+                  </p>
+                  <p class="mb-2">
+                    <i class="fas fa-phone text-success me-2"></i>
+                    <strong>Teléfono:</strong><br />
+                    <span class="ms-4">+57 (2) 225-4567</span>
+                  </p>
+                  <p class="mb-2">
+                    <i class="fas fa-clock text-success me-2"></i>
+                    <strong>Horario:</strong><br />
+                    <span class="ms-4">Lun - Vie: 7:00 AM - 6:00 PM</span><br />
+                    <span class="ms-4">Sábados: 8:00 AM - 2:00 PM</span>
+                  </p>
+                  <div class="text-center mt-3">
+                    <a href="#" class="btn btn-outline-success btn-sm">
+                      <i class="fas fa-map"></i> Ver en Mapa
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sucursal Aeropuerto -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm branch-card">
+                <div class="card-body">
+                  <div class="text-center mb-3">
+                    <i class="fas fa-plane-departure fa-3x text-success"></i>
+                  </div>
+                  <h5 class="card-title text-center text-success">
+                    Sucursal Aeropuerto
+                  </h5>
+                  <hr />
+                  <p class="mb-2">
+                    <i class="fas fa-location-dot text-success me-2"></i>
+                    <strong>Dirección:</strong><br />
+                    <span class="ms-4"
+                      >Aeropuerto Alfonso Bonilla Aragón, Palmira</span
+                    >
+                  </p>
+                  <p class="mb-2">
+                    <i class="fas fa-phone text-success me-2"></i>
+                    <strong>Teléfono:</strong><br />
+                    <span class="ms-4">+57 (2) 266-7890</span>
+                  </p>
+                  <p class="mb-2">
+                    <i class="fas fa-clock text-success me-2"></i>
+                    <strong>Horario:</strong><br />
+                    <span class="ms-4">Todos los días: 5:00 AM - 11:00 PM</span>
+                  </p>
+                  <div class="text-center mt-3">
+                    <a href="#" class="btn btn-outline-success btn-sm">
+                      <i class="fas fa-map"></i> Ver en Mapa
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sucursal Norte -->
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 shadow-sm branch-card">
+                <div class="card-body">
+                  <div class="text-center mb-3">
+                    <i class="fas fa-building fa-3x text-success"></i>
+                  </div>
+                  <h5 class="card-title text-center text-success">
+                    Sucursal Norte - Cali
+                  </h5>
+                  <hr />
+                  <p class="mb-2">
+                    <i class="fas fa-location-dot text-success me-2"></i>
+                    <strong>Dirección:</strong><br />
+                    <span class="ms-4"
+                      >Av. 6 Norte # 23N-45, Cali, Valle del Cauca</span
+                    >
+                  </p>
+                  <p class="mb-2">
+                    <i class="fas fa-phone text-success me-2"></i>
+                    <strong>Teléfono:</strong><br />
+                    <span class="ms-4">+57 (2) 668-1234</span>
+                  </p>
+                  <p class="mb-2">
+                    <i class="fas fa-clock text-success me-2"></i>
+                    <strong>Horario:</strong><br />
+                    <span class="ms-4">Lun - Vie: 8:00 AM - 6:00 PM</span><br />
+                    <span class="ms-4">Sábados: 9:00 AM - 1:00 PM</span>
+                  </p>
+                  <div class="text-center mt-3">
+                    <a href="#" class="btn btn-outline-success btn-sm">
+                      <i class="fas fa-map"></i> Ver en Mapa
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Tarifas -->
+      <section
+        id="tarifas"
+        role="region"
+        aria-label="Tarifas"
+        class="py-5 bg-light"
+      >
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="fw-bold">Tarifas y Planes</h2>
+            <p class="text-muted fs-5 mt-3">
+              Elige el plan que mejor se adapte a tus necesidades y presupuesto
+            </p>
+          </div>
+
+          <div class="row g-4 mb-5">
+            <!-- Plan Diario -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 shadow-sm pricing-card">
+                <div class="card-header bg-success text-white text-center py-3">
+                  <h5 class="mb-0">Plan Diario</h5>
+                </div>
+                <div class="card-body text-center">
+                  <div class="mb-3">
+                    <span class="h2 fw-bold">Desde</span>
+                    <div class="display-4 fw-bold text-success">$80K</div>
+                    <span class="text-muted">por día</span>
+                  </div>
+                  <ul class="list-unstyled text-start">
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Seguro básico incluido
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      200 km diarios incluidos
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Asistencia 24/7
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Sin conductor
+                    </li>
+                    <li class="mb-2 text-muted">
+                      <i class="fas fa-times me-2"></i>
+                      Descuentos semanales
+                    </li>
+                  </ul>
+                  <a href="#" class="btn btn-success w-100 mt-3"
+                    >Reservar Ahora</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Plan Semanal -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 shadow pricing-card border-success">
+                <div class="card-header bg-success text-white text-center py-3">
+                  <h5 class="mb-0">Plan Semanal</h5>
+                  <span class="badge bg-warning text-dark">Más Popular</span>
+                </div>
+                <div class="card-body text-center">
+                  <div class="mb-3">
+                    <span class="h2 fw-bold">Desde</span>
+                    <div class="display-4 fw-bold text-success">$500K</div>
+                    <span class="text-muted">7 días</span>
+                  </div>
+                  <ul class="list-unstyled text-start">
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Seguro completo incluido
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Kilometraje ilimitado
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Asistencia 24/7
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      15% de descuento
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Cambio de vehículo gratis
+                    </li>
+                  </ul>
+                  <a href="#" class="btn btn-success w-100 mt-3"
+                    >Reservar Ahora</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Plan Mensual -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 shadow-sm pricing-card">
+                <div class="card-header bg-success text-white text-center py-3">
+                  <h5 class="mb-0">Plan Mensual</h5>
+                </div>
+                <div class="card-body text-center">
+                  <div class="mb-3">
+                    <span class="h2 fw-bold">Desde</span>
+                    <div class="display-4 fw-bold text-success">$1.8M</div>
+                    <span class="text-muted">30 días</span>
+                  </div>
+                  <ul class="list-unstyled text-start">
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Seguro completo incluido
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Kilometraje ilimitado
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Asistencia 24/7
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      25% de descuento
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Mantenimiento incluido
+                    </li>
+                  </ul>
+                  <a href="#" class="btn btn-success w-100 mt-3"
+                    >Reservar Ahora</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Plan Corporativo -->
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 shadow-sm pricing-card">
+                <div class="card-header bg-dark text-white text-center py-3">
+                  <h5 class="mb-0">Plan Corporativo</h5>
+                </div>
+                <div class="card-body text-center">
+                  <div class="mb-3">
+                    <div class="display-4 fw-bold text-success">Custom</div>
+                    <span class="text-muted">Personalizado</span>
+                  </div>
+                  <ul class="list-unstyled text-start">
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Seguro premium incluido
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Flota personalizada
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Gestor de cuenta dedicado
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Facturación mensual
+                    </li>
+                    <li class="mb-2">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Descuentos corporativos
+                    </li>
+                  </ul>
+                  <a
+                    href="pages/servicio-corporativo.html"
+                    class="btn btn-dark w-100 mt-3"
+                    >Contactar</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información Adicional -->
+          <div class="row">
+            <div class="col-12">
+              <div class="alert alert-info">
+                <h5 class="alert-heading">
+                  <i class="fas fa-info-circle me-2"></i>Información Importante
+                </h5>
+                <ul class="mb-0">
+                  <li>
+                    Todos los planes requieren licencia de conducción vigente
+                  </li>
+                  <li>Se requiere depósito de garantía reembolsable</li>
+                  <li>Combustible no incluido en las tarifas</li>
+                  <li>
+                    Kilometraje adicional: $500 por km (planes con límite)
+                  </li>
+                  <li>Descuentos especiales para estudiantes y tercera edad</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" role="region" aria-label="Servicios" class="py-5">
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="fw-bold">Nuestros Servicios Especializados</h2>
+            <p class="text-muted fs-5 mt-3">
+              Soluciones de movilidad adaptadas a cada necesidad
+            </p>
+          </div>
+
+          <!-- Renta por Día -->
+          <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+              <img
+                src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800"
+                alt="Renta por Día"
+                class="img-fluid rounded shadow"
+              />
+            </div>
+            <div class="col-md-6">
+              <h3 class="text-success mb-3">Renta por Día</h3>
+              <p class="mb-4">
+                Ideal para viajes cortos y trámites en la ciudad. Precios
+                competitivos y sin complicaciones. Disfruta de la libertad de
+                movilidad con nuestro servicio de renta diaria.
+              </p>
+              <a href="pages/renta-por-dia.html" class="btn btn-success"
+                >Más Información</a
+              >
+            </div>
+          </div>
+
+          <!-- Renta por Viaje -->
+          <div class="row align-items-center mb-5">
+            <div class="col-md-6 order-md-2">
+              <img
+                src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800"
+                alt="Renta por Viaje"
+                class="img-fluid rounded shadow"
+              />
+            </div>
+            <div class="col-md-6 order-md-1">
+              <h3 class="text-success mb-3">Renta por Viaje</h3>
+              <p class="mb-4">
+                Planes especiales para vacaciones o viajes de negocios. Incluye
+                seguro y asistencia en ruta. Amplia gama de vehículos
+                disponibles para tus viajes largos.
+              </p>
+              <a href="pages/renta-por-viaje.html" class="btn btn-success"
+                >Más Información</a
+              >
+            </div>
+          </div>
+
+          <!-- Servicio Corporativo -->
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <img
+                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800"
+                alt="Servicio Corporativo"
+                class="img-fluid rounded shadow"
+              />
+            </div>
+            <div class="col-md-6">
+              <h3 class="text-success mb-3">Servicio Corporativo</h3>
+              <p class="mb-4">
+                Soluciones de movilidad para empresas con tarifas
+                preferenciales. Planes personalizados según las necesidades de
+                tu empresa.
+              </p>
+              <a href="pages/servicio-corporativo.html" class="btn btn-success"
+                >Más Información</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-dark text-white py-5">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-md-4">
+            <h3 class="text-success mb-3">RentaAutos</h3>
+            <p>
+              La mejor opción en alquiler de vehículos con más de 5 años de
+              experiencia en el mercado.
+            </p>
+            <div class="d-flex gap-3 mt-3">
+              <a
+                href="https://www.facebook.com/profile.php?id=100064032654738"
+                class="text-white fs-4"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                href="https://www.tiktok.com/@rentaautostulua?_t=ZS-8zmPbGOc43j&_r=1"
+                class="text-white fs-4"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-tiktok"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/rentaautostulua?igsh=MW1waHp3aW5saTc5ZA=="
+                class="text-white fs-4"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <h3 class="text-success mb-3">Contáctanos</h3>
+            <p><i class="fas fa-envelope me-2"></i> rentaauto@gmail.com</p>
+            <p>
+              <i class="fas fa-envelope me-2"></i> soportetucodigo@gmail.com
+            </p>
+            <a href="pages/leyes.html" class="btn btn-outline-light btn-sm"
+              >Ver Leyes y Normativas</a
+            >
+          </div>
+
+          <div class="col-md-4">
+            <h3 class="text-success mb-3">Desarrolladores</h3>
+            <p class="mb-2">
+              <i class="fas fa-code me-2"></i>
+              <strong>Equipo de Desarrollo</strong>
+            </p>
+            <div class="mb-2">
+              <i class="fab fa-github me-2"></i>
+              <a
+                href="https://github.com/cristianhoyos01-bit"
+                class="text-white text-decoration-none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cristian Hoyos
+              </a>
+            </div>
+            <div class="mb-2">
+              <i class="fab fa-github me-2"></i>
+              <a
+                href="https://github.com/juanfer2806"
+                class="text-white text-decoration-none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Juan Fernando Ramirez
+              </a>
+            </div>
+            <div class="mb-2">
+              <i class="fab fa-github me-2"></i>
+              <a
+                href="https://github.com/kavila-code"
+                class="text-white text-decoration-none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Kelly Ávila
+              </a>
+            </div>
+            <div class="mb-2">
+              <i class="fab fa-github me-2"></i>
+              <a
+                href="https://github.com/juansalazar10"
+                class="text-white text-decoration-none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Juan David Salazar
+              </a>
+            </div>
+            <p class="mb-0 text-white-50 small mt-2">
+              Desarrollado con <i class="fas fa-heart text-danger"></i> para
+              RentaAutos
+            </p>
+          </div>
+        </div>
+
+        <div class="border-top border-secondary mt-4 pt-4 text-center">
+          <p class="mb-0">
+            &copy; 2025 RentaAutos. Todos los derechos reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal: Login -->
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Iniciar sesión</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3 text-center">
+              <button
+                id="btnGoogleLogin"
+                type="button"
+                class="btn btn-outline-primary w-100 mb-3"
+              >
+                <i class="fab fa-google me-2"></i>Entrar con Google
+              </button>
+              <div class="small text-muted">o usa tu correo</div>
+            </div>
+            <form id="loginForm" action="#" method="post" novalidate>
+              <div class="mb-3">
+                <label for="loginEmail" class="form-label"
+                  >Correo electrónico</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="loginEmail"
+                  name="email"
+                  placeholder="tucorreo@ejemplo.com"
+                  required
+                />
+                <div class="form-text">
+                  Nunca compartiremos tu correo con nadie.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="loginPassword" class="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginPassword"
+                  name="password"
+                  placeholder="Tu contraseña"
+                  required
+                />
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="1"
+                    id="rememberMe"
+                    name="remember"
+                  />
+                  <label class="form-check-label" for="rememberMe"
+                    >Recordarme</label
+                  >
+                </div>
+                <a href="#" class="small">¿Olvidaste tu contraseña?</a>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <a href="pages/registro.html" class="btn btn-outline-success">
+              Registrarte
+            </a>
+            <button type="submit" class="btn btn-success" form="loginForm">
+              Entrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Firebase + app scripts -->
+    <!-- WARNING: Replace values in js/firebase-config.js with your Firebase project config -->
+    <script type="module" src="js/script.js"></script>
+  </body>
+</html>
