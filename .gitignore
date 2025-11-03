@@ -1,0 +1,16 @@
+# Ignore node modules and build artifacts
+node_modules/
+functions/node_modules/
+public/node_modules/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Firebase local env
+.firebase/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

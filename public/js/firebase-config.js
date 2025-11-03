@@ -1,7 +1,9 @@
 // Configuración pública de Firebase proporcionada por el usuario.
 // Obtén estas mismas credenciales desde Firebase Console -> Project settings
 export const firebaseConfig = {
-  apiKey: "AIzaSyCX76VT70yv-KSkkwymEO_0gm1bjz34W9s",
+  // API key redacted from the public repository. Rotate/revoke the leaked key in
+  // Google Cloud Console and place the new key in your deployment environment.
+  apiKey: "REDACTED_GOOGLE_API_KEY",
   authDomain: "rentaauto-bd32b.firebaseapp.com",
   projectId: "rentaauto-bd32b",
   storageBucket: "rentaauto-bd32b.firebasestorage.app",
