@@ -3,6 +3,10 @@ node_modules/
 functions/node_modules/
 public/node_modules/
 
+# Local Firebase config (do not commit your API keys)
+js/firebase-config.local.js
+public/js/firebase-config.local.js
+
 # OS files
 Thumbs.db
 .DS_Store
