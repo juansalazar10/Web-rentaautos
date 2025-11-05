@@ -4,9 +4,15 @@
   "private": true,
   "description": "Static frontend for Renta Autos - start script to run node static server",
   "scripts": {
-    "start": "node scripts/server.js --dir . --port 8000"
+    "start": "node scripts/server.js --dir . --port 8000",
+    "api": "node server/index.js"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
   }
 }
