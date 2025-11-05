@@ -1,6 +1,7 @@
 // Servidor API mínimo para usar la conexión a PostgreSQL
 const express = require('express');
 const dotenv = require('dotenv');
+const path = require('path');
 const { query } = require('./db');
 
 dotenv.config();
@@ -8,7 +9,16 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+// API health
 app.get('/api/health', (req, res) => res.json({ ok: true }));
+
+// Servir archivos estáticos del frontend (raíz del proyecto)
+const staticDir = path.join(__dirname, '..');
+app.use(express.static(staticDir));
+// Redirigir root a index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(staticDir, 'index.html'));
+});
 
 // Crear reserva (sin validaciones complejas)
 app.post('/api/reservations', async (req, res) => {
