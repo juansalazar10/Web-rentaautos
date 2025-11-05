@@ -3,16 +3,12 @@ node_modules/
 functions/node_modules/
 public/node_modules/
 
-# Local Firebase config (do not commit your API keys)
-js/firebase-config.local.js
-public/js/firebase-config.local.js
+# Local Firebase config (do not commit your API keys) -- removed as project no longer uses Firebase
+# (leftover entries removed)
 
 # OS files
 Thumbs.db
 .DS_Store
-
-# Firebase local env
-.firebase/
 
 # Log files
 npm-debug.log*
