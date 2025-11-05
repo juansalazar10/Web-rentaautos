@@ -8,9 +8,48 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+const bcrypt = require('bcryptjs');
 
 // API health
 app.get('/api/health', (req, res) => res.json({ ok: true }));
+
+// Crear usuario (registro)
+app.post('/api/usuarios', async (req, res) => {
+  const { nombre, email, password, rol } = req.body;
+  if (!nombre || !email || !password) {
+    return res.status(400).json({ error: 'Faltan campos obligatorios' });
+  }
+
+  const userRole = rol || 'cliente';
+
+  try {
+    // hash password with bcryptjs
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+
+    // note: column name uses non-ascii 'contraseña' in the DB schema provided
+    const insertQ = `INSERT INTO usuarios (nombre, email, "contraseña", rol) VALUES ($1,$2,$3,$4) RETURNING id, fecha_registro`;
+    const r = await query(insertQ, [nombre, email, hash, userRole]);
+    return res.status(201).json({ id: r.rows[0].id, createdAt: r.rows[0].fecha_registro });
+  } catch (err) {
+    console.error('Error creando usuario', err);
+    // unique violation code in Postgres
+    if (err.code === '23505') return res.status(409).json({ error: 'Email ya registrado' });
+    return res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+// Listar usuarios (útil para debug local)
+app.get('/api/usuarios', async (req, res) => {
+  try {
+    const q = 'SELECT id, nombre, email, fecha_registro FROM usuarios ORDER BY id DESC LIMIT 100';
+    const r = await query(q, []);
+    return res.json(r.rows);
+  } catch (err) {
+    console.error('Error listando usuarios', err);
+    return res.status(500).json({ error: 'Error interno' });
+  }
+});
 
 // Servir archivos estáticos del frontend (raíz del proyecto)
 const staticDir = path.join(__dirname, '..');

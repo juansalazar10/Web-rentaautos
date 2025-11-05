@@ -54,3 +54,13 @@ Abrir `http://localhost:8000` en el navegador.
 
 - Dependencias Node: no hay paquetes externos listados en `package.json`.
 - Recursos cargados por CDN: Bootstrap CSS/JS, Font Awesome, Google Fonts.
+
+# .env
+
+DATABASE_URL=postgres://dbuser:dbpassword@localhost:5432/Rentaautos_BD
+
+# Si usas SSL en el host remoto:
+
+# DATABASE_SSL=true
+
+PORT=8000

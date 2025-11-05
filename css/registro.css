@@ -1,0 +1,79 @@
+/* Styles specific to the registration page */
+
+.register-page {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(180deg, #f7f9fb 0%, #ffffff 60%);
+}
+
+.register-card {
+  width: 100%;
+  max-width: 580px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(20, 20, 20, 0.08);
+  border: 1px solid rgba(30, 30, 30, 0.03);
+}
+
+.register-card .card-body {
+  padding: 2.2rem;
+}
+
+.register-card h3 {
+  font-size: 1.6rem;
+  letter-spacing: -0.2px;
+}
+
+.register-card .lead-muted {
+  color: #6c757d;
+}
+
+/* inputs */
+.register-card .form-control {
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(100, 100, 100, 0.12);
+  box-shadow: none;
+}
+
+.register-card .form-control:focus {
+  outline: none;
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.06);
+  border-color: rgba(40, 167, 69, 0.35);
+}
+
+.input-group .btn-toggle-password {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+}
+
+/* small helper and validation message */
+#passwordMatch {
+  margin-top: 0.35rem;
+  font-weight: 600;
+}
+
+#passwordMatch.valid {
+  color: #198754; /* bootstrap success */
+}
+
+#passwordMatch.invalid {
+  color: #dc3545; /* bootstrap danger */
+}
+
+/* buttons responsive */
+.register-card .btn {
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+}
+
+@media (max-width: 576px) {
+  .register-card .card-body {
+    padding: 1.25rem;
+  }
+}

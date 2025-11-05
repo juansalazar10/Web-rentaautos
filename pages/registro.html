@@ -9,6 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/styles-modern.css" />
+    <link rel="stylesheet" href="../css/registro.css" />
   </head>
   <body>
     <header class="py-3 bg-white shadow-sm">
@@ -25,12 +26,15 @@
       </div>
     </header>
 
-    <main class="container py-5">
+    <main class="container py-5 register-page">
       <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card shadow-sm">
+        <div class="col-12">
+          <div class="card register-card">
             <div class="card-body">
-              <h3 class="card-title text-center mb-4">Crea tu cuenta</h3>
+              <h3 class="card-title text-center mb-2">Crea tu cuenta</h3>
+              <p class="text-center text-muted mb-4">
+                Regístrate para reservar vehículos rápidamente
+              </p>
               <form
                 action="#"
                 method="post"
@@ -47,6 +51,8 @@
                     id="regName"
                     name="name"
                     class="form-control"
+                    placeholder="Juan Pérez"
+                    autofocus
                     required
                   />
                 </div>
@@ -59,38 +65,70 @@
                     id="regEmail"
                     name="email"
                     class="form-control"
+                    placeholder="tucorreo@ejemplo.com"
                     required
                   />
+                  <div class="form-text">
+                    Usa un correo válido para recuperar tu cuenta.
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="regPassword" class="form-label">Contraseña</label>
-                  <input
-                    type="password"
-                    id="regPassword"
-                    name="password"
-                    class="form-control"
-                    required
-                    minlength="6"
-                  />
+                  <div class="input-group">
+                    <input
+                      type="password"
+                      id="regPassword"
+                      name="password"
+                      class="form-control"
+                      placeholder="Al menos 6 caracteres"
+                      required
+                      minlength="6"
+                    />
+                    <button
+                      class="btn btn-outline-secondary btn-toggle-password"
+                      type="button"
+                      data-target="regPassword"
+                    >
+                      Mostrar
+                    </button>
+                  </div>
+                  <div class="form-text">
+                    Mínimo 6 caracteres. Evita usar contraseñas obvias.
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="regPassword2" class="form-label"
                     >Confirmar contraseña</label
                   >
-                  <input
-                    type="password"
-                    id="regPassword2"
-                    name="password2"
-                    class="form-control"
-                    required
-                    minlength="6"
-                  />
+                  <div class="input-group">
+                    <input
+                      type="password"
+                      id="regPassword2"
+                      name="password2"
+                      class="form-control"
+                      placeholder="Vuelve a escribir la contraseña"
+                      required
+                      minlength="6"
+                    />
+                    <button
+                      class="btn btn-outline-secondary btn-toggle-password"
+                      type="button"
+                      data-target="regPassword2"
+                    >
+                      Mostrar
+                    </button>
+                  </div>
+                  <div id="passwordMatch" class="form-text"></div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <a href="../index.html" class="btn btn-outline-secondary"
+                <div
+                  class="d-flex flex-column flex-sm-row justify-content-between gap-2 align-items-center"
+                >
+                  <a
+                    href="../index.html"
+                    class="btn btn-outline-secondary w-100 w-sm-auto"
                     >Cancelar</a
                   >
-                  <button type="submit" class="btn btn-success">
+                  <button type="submit" class="btn btn-success w-100 w-sm-auto">
                     Crear cuenta
                   </button>
                 </div>
@@ -105,21 +143,111 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      // Validación simple: comprobar contraseñas coinciden antes de "enviar"
-      document
-        .getElementById("registerForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-          const p1 = document.getElementById("regPassword").value;
-          const p2 = document.getElementById("regPassword2").value;
-          if (p1 !== p2) {
-            alert("Las contraseñas no coinciden.");
-            return false;
+      // Mejoras: toggles para mostrar/ocultar contraseña y feedback directo
+      document.querySelectorAll(".btn-toggle-password").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          const targetId = btn.getAttribute("data-target");
+          const input = document.getElementById(targetId);
+          if (!input) return;
+          if (input.type === "password") {
+            input.type = "text";
+            btn.textContent = "Ocultar";
+          } else {
+            input.type = "password";
+            btn.textContent = "Mostrar";
           }
-          // Aquí se podría enviar el formulario al servidor
-          alert("Registro simulado: formulario válido.");
-          return false;
         });
+      });
+
+      const registerForm = document.getElementById("registerForm");
+      const passwordMatchEl = document.getElementById("passwordMatch");
+
+      function updatePasswordMatch() {
+        const p1 = document.getElementById("regPassword").value;
+        const p2 = document.getElementById("regPassword2").value;
+        if (!p1 && !p2) {
+          passwordMatchEl.textContent = "";
+          passwordMatchEl.className = "form-text";
+          return;
+        }
+        if (p1 === p2) {
+          passwordMatchEl.textContent = "Las contraseñas coinciden.";
+          passwordMatchEl.className = "form-text valid";
+        } else {
+          passwordMatchEl.textContent = "Las contraseñas no coinciden.";
+          passwordMatchEl.className = "form-text invalid";
+        }
+      }
+
+      document
+        .getElementById("regPassword")
+        .addEventListener("input", updatePasswordMatch);
+      document
+        .getElementById("regPassword2")
+        .addEventListener("input", updatePasswordMatch);
+
+      registerForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const name = document.getElementById("regName").value.trim();
+        const email = document.getElementById("regEmail").value.trim();
+        const p1 = document.getElementById("regPassword").value;
+        const p2 = document.getElementById("regPassword2").value;
+
+        if (!name || !email || !p1) {
+          passwordMatchEl.textContent = "Por favor completa todos los campos.";
+          passwordMatchEl.className = "form-text invalid";
+          return;
+        }
+
+        if (p1 !== p2) {
+          passwordMatchEl.textContent = "Las contraseñas no coinciden.";
+          passwordMatchEl.className = "form-text invalid";
+          return;
+        }
+
+        // enviar al servidor
+        const submitBtn = registerForm.querySelector('button[type="submit"]');
+        const prevText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Registrando...";
+
+        try {
+          const res = await fetch("/api/usuarios", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre: name, email: email, password: p1 }),
+          });
+
+          if (res.status === 201) {
+            const body = await res.json();
+            alert("Registro exitoso. Ya puedes iniciar sesión.");
+            // redirigir al inicio o al login modal
+            window.location.href = "../index.html";
+            return;
+          }
+
+          const err = await res
+            .json()
+            .catch(() => ({ error: "Error desconocido" }));
+          if (res.status === 409) {
+            passwordMatchEl.textContent = err.error || "Email ya registrado";
+            passwordMatchEl.className = "form-text invalid";
+          } else if (res.status === 400) {
+            passwordMatchEl.textContent = err.error || "Datos inválidos";
+            passwordMatchEl.className = "form-text invalid";
+          } else {
+            passwordMatchEl.textContent = err.error || "Error del servidor";
+            passwordMatchEl.className = "form-text invalid";
+          }
+        } catch (networkErr) {
+          console.error("Network error", networkErr);
+          passwordMatchEl.textContent = "No se pudo conectar con el servidor.";
+          passwordMatchEl.className = "form-text invalid";
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = prevText;
+        }
+      });
     </script>
   </body>
 </html>
