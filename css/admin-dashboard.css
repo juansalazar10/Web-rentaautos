@@ -21,11 +21,14 @@ body {
 .navbar.bg-success {
     background: linear-gradient(90deg, var(--primary), var(--primary));
     box-shadow: 0 8px 24px rgba(40,167,69,0.12);
+    padding: .5rem 1rem;
+    min-height: 64px;
 }
 .navbar .navbar-brand {
     color: #fff !important;
     font-weight: 800;
     letter-spacing: -0.4px;
+    font-size: 1.25rem;
 }
 .navbar .btn-outline-light {
     border-color: rgba(255,255,255,0.2);
@@ -105,18 +108,29 @@ table.table tbody tr td:first-child {
 /* user dropdown / avatar in navbar */
 .avatar-sm { width: 34px; height: 34px; border-radius: 50%; }
 .navbar .dropdown-menu {
-    min-width: 180px;
+    min-width: 200px;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    box-shadow: 0 12px 34px rgba(12,30,12,0.12);
+    margin-top: .4rem; /* avoid visual overlap with navbar */
 }
 .navbar .dropdown-item { border-radius: 6px; }
 .navbar .btn-light {
-    background: rgba(255,255,255,0.95);
+    /* subtle, semi-transparent button so it blends with the navbar */
+    background: rgba(255,255,255,0.12);
+    color: #fff;
     padding: .35rem .5rem;
     border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: none;
 }
 .navbar-text { opacity: 0.95; }
-.navbar .muted-small { color: rgba(255,255,255,0.9); opacity: 0.9; }
+.navbar .muted-small { color: rgba(255,255,255,0.95); opacity: 0.95; }
+
+/* avatar border to stand out on green bar */
+.navbar .avatar-sm { border: 2px solid rgba(255,255,255,0.18); }
 
 /* small navbar stats */
 #navbarStats { font-weight: 700; margin-left: .25rem; }
+
+/* ensure dropdown sits below navbar edge and is clearly visible */
+.dropdown-menu.dropdown-menu-end { transform: translateY(4px); }
