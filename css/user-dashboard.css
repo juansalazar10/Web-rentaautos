@@ -1,0 +1,36 @@
+/* User dashboard styles */
+:root{
+  --ua-primary: #2fa84f;
+  --ua-dark: #23823a;
+  --ua-bg: #fbfdfb;
+  --ua-card: #ffffff;
+  --ua-muted: #6b7280;
+}
+
+body{
+  background: linear-gradient(180deg, var(--ua-bg), #f4faf4);
+  color: #12321a;
+}
+
+.navbar.user-nav{
+  background: linear-gradient(90deg,var(--ua-primary),var(--ua-primary));
+  box-shadow: 0 6px 20px rgba(18,50,26,0.08);
+  padding: .5rem 1rem;
+}
+
+.navbar.user-nav .navbar-brand{ color:#fff; font-weight:700; }
+
+.card.user-profile{ border-radius:14px; box-shadow:0 8px 24px rgba(17,24,17,0.05); border:1px solid rgba(34,139,34,0.04); }
+
+.profile-avatar{ width:84px; height:84px; border-radius:50%; background:linear-gradient(180deg,#fff,#f3fff3); border:3px solid rgba(255,255,255,0.7); display:flex; align-items:center; justify-content:center; font-size:26px; color:var(--ua-dark); }
+
+.card.user-actions .btn{ border-radius:10px; }
+
+/* reservation cards */
+#reservationsArea .card{ border-radius:12px; border:1px solid rgba(34,139,34,0.04); }
+
+@media (max-width:767.98px){
+  .profile-avatar{ width:64px; height:64px; font-size:20px; }
+}
+
+.muted-small{ color:var(--ua-muted); }
