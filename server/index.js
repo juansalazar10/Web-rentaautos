@@ -64,7 +64,31 @@ app.post('/api/login', async (req, res) => {
     if (r.rowCount === 0) return res.status(401).json({ error: 'Credenciales inválidas' });
 
     const user = r.rows[0];
-    const match = bcrypt.compareSync(password, user.contraseña);
+
+    // Primero intentamos comparar con bcrypt (usuario puede ya tener hash)
+    let match = false;
+    try {
+      match = bcrypt.compareSync(password, user.contraseña);
+    } catch (e) {
+      match = false;
+    }
+
+    // Si la comparación falla, puede que la contraseña en la BD esté en texto plano.
+    // En ese caso, si coincide con la contraseña enviada, re-hasheamos y actualizamos.
+    if (!match) {
+      if (user.contraseña && user.contraseña === password) {
+        try {
+          const salt = bcrypt.genSaltSync(10);
+          const newHash = bcrypt.hashSync(password, salt);
+          await query('UPDATE usuarios SET "contraseña" = $1 WHERE id = $2', [newHash, user.id]);
+          match = true;
+          console.log(`Re-hashed plain password for user id=${user.id}`);
+        } catch (err) {
+          console.error('Error re-hashing password on login for id=' + user.id, err);
+        }
+      }
+    }
+
     if (!match) return res.status(401).json({ error: 'Credenciales inválidas' });
 
     const payload = { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol };
@@ -154,5 +178,34 @@ app.get('/api/reservations', async (req, res) => {
   }
 });
 
+// Ensure an administrator account exists on startup. Credentials can be
+// provided via env vars ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME. If not set,
+// defaults are used (suitable for local development only).
+async function ensureAdmin() {
+  const adminEmail = process.env.ADMIN_EMAIL || 'admin@rentacar.com';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  const adminName = process.env.ADMIN_NAME || 'Administrador General';
+
+  try {
+    const checkQ = 'SELECT id FROM usuarios WHERE email = $1 LIMIT 1';
+    const r = await query(checkQ, [adminEmail]);
+    if (r.rowCount > 0) {
+      console.log('Admin user already exists:', adminEmail);
+      return;
+    }
+
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(adminPassword, salt);
+    const insertQ = `INSERT INTO usuarios (nombre, email, "contraseña", rol) VALUES ($1,$2,$3,$4) RETURNING id`;
+    const ir = await query(insertQ, [adminName, adminEmail, hash, 'admin']);
+    console.log(`Created admin user id=${ir.rows[0].id} email=${adminEmail}`);
+  } catch (err) {
+    console.error('Error ensuring admin user exists', err);
+  }
+}
+
 const port = process.env.PORT_API || 4000;
-app.listen(port, () => console.log(`API server listening on http://localhost:${port}`));
+(async () => {
+  await ensureAdmin();
+  app.listen(port, () => console.log(`API server listening on http://localhost:${port}`));
+})();
