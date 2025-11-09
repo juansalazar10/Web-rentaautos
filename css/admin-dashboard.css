@@ -101,3 +101,22 @@ table.table tbody tr td:first-child {
 
 /* small utility */
 .muted-small { color: var(--muted); font-size: .95rem; }
+
+/* user dropdown / avatar in navbar */
+.avatar-sm { width: 34px; height: 34px; border-radius: 50%; }
+.navbar .dropdown-menu {
+    min-width: 180px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+.navbar .dropdown-item { border-radius: 6px; }
+.navbar .btn-light {
+    background: rgba(255,255,255,0.95);
+    padding: .35rem .5rem;
+    border-radius: 10px;
+}
+.navbar-text { opacity: 0.95; }
+.navbar .muted-small { color: rgba(255,255,255,0.9); opacity: 0.9; }
+
+/* small navbar stats */
+#navbarStats { font-weight: 700; margin-left: .25rem; }
