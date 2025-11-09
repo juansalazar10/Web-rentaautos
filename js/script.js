@@ -108,9 +108,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 modalInstance.hide();
             }
 
-            // actualizar UI y redirigir al dashboard
+            // actualizar UI y redirigir según rol
             updateUIForAuth();
-            window.location.href = '/pages/dashboard.html';
+            try {
+                const role = data.user && data.user.rol ? data.user.rol : 'cliente';
+                if (role === 'admin') {
+                    window.location.href = '/pages/admin.html';
+                } else {
+                    window.location.href = '/pages/user.html';
+                }
+            } catch (e) {
+                window.location.href = '/pages/dashboard.html';
+            }
         } catch (err) {
             console.error('Login error', err);
             alert('Error intentando iniciar sesión');
