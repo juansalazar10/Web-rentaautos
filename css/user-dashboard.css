@@ -109,6 +109,32 @@ body {
 .catalog-price { font-weight:800; color:var(--primary-600); font-size:1.05rem; }
 .catalog-badge { background: rgba(255,255,255,0.9); padding:4px 8px; border-radius:999px; font-weight:700; color:var(--primary-600); border:1px solid rgba(33,136,56,0.06); }
 
+/* Larger card style like the example: title, image area, big CTA */
+.catalog-card {
+  display:flex;
+  flex-direction:column;
+  border-radius:12px;
+  background:#fff;
+  padding:18px;
+  gap:12px;
+}
+.catalog-card .catalog-title {
+  font-size:14px;
+  font-weight:800;
+  color:var(--primary-600);
+  text-transform:uppercase;
+  letter-spacing:0.6px;
+}
+.catalog-card .catalog-sub { font-size:13px; color:var(--muted); margin-bottom:8px; }
+.catalog-image-wrap { display:flex; align-items:center; justify-content:center; padding:12px 0; }
+.catalog-image-wrap img { max-height:150px; width:auto; }
+.catalog-dots { display:flex; gap:6px; justify-content:center; margin-top:8px; }
+.catalog-dots span { width:8px; height:8px; background:rgba(0,0,0,0.1); border-radius:999px; display:inline-block; }
+.catalog-dots span.active { background:var(--primary); }
+.btn-reserve { background: linear-gradient(180deg,var(--primary),var(--primary-600)); color:#fff; border:none; padding:12px 16px; border-radius:8px; width:100%; font-weight:800; }
+.catalog-details { display:block; text-align:center; color:var(--primary-600); margin-top:8px; font-size:13px; }
+.catalog-disclaimer { font-size:11px; color:var(--muted); margin-top:8px; }
+
 @media (max-width: 991.98px) {
   .catalog-grid { grid-template-columns: repeat(2,1fr); }
 }

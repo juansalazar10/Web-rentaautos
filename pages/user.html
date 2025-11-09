@@ -143,21 +143,21 @@
               const el = document.createElement("div");
               el.className = "catalog-card";
               el.innerHTML = `
-                <img src="${v.image}" alt="${v.name}" />
-                <div class="catalog-overlay">
-                  <div class="catalog-badge">${v.type}</div>
+                <div class="catalog-title">${v.name}</div>
+                <div class="catalog-sub">${v.description}</div>
+                <div class="catalog-image-wrap">
+                  <img src="${v.image}" alt="${v.name}" />
                 </div>
-                <div class="card-body">
-                  <h5 class="mb-1">${v.name}</h5>
-                  <p class="text-muted small mb-2">${v.seats} plazas</p>
-                  <p class="mb-0 text-muted">${v.description}</p>
-                </div>
-                <div class="card-footer">
-                  <div class="catalog-price">$${v.price_per_day}/día</div>
-                  <div><a class="btn btn-sm btn-success" href="/pages/renta-por-dia.html?vehicle=${encodeURIComponent(
+                <div class="catalog-dots"><span class="active"></span><span></span><span></span></div>
+                <div>
+                  <a class="btn-reserve" href="/pages/renta-por-dia.html?vehicle=${encodeURIComponent(
                     v.id
-                  )}">Reservar</a></div>
+                  )}">Reservar ahora</a>
                 </div>
+                <a class="catalog-details" href="/pages/renta-por-dia.html?vehicle=${encodeURIComponent(
+                  v.id
+                )}">Mostrar detalles</a>
+                <div class="catalog-disclaimer">*Su reserva garantiza uno de los modelos de vehículos arriba, sujeto a disponibilidad de la agencia.</div>
               `;
               catalogEl.appendChild(el);
             });
