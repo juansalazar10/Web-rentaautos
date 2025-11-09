@@ -68,7 +68,7 @@
           </p>
           <div id="catalogArea" class="catalog-grid">Cargando veh</div>
         </div>
-      </div>
+              <a class="btn-reserve" href="/pages/renta-por-dia-custom.html?vehicle=${encodeURIComponent(v.id)}">Reservar ahora</a>
     </main>
     <script>
       (function () {
@@ -139,27 +139,69 @@
               return (catalogEl.innerHTML =
                 '<p class="text-muted">No hay vehículos disponibles.</p>');
             catalogEl.innerHTML = "";
+            // keep list globally for modal access
+            window._vehicleList = list;
             list.forEach((v) => {
               const el = document.createElement("div");
               el.className = "catalog-card";
+
+              const carouselId = `carousel-${v.id}`;
+              const images = Array.isArray(v.images)
+                ? v.images
+                : v.image
+                ? [v.image]
+                : [];
+              const carouselItems = images
+                .map(
+                  (src, idx) => `
+                  <div class="carousel-item ${idx === 0 ? "active" : ""}">
+                    <img src="${src}" class="d-block w-100" alt="${
+                    v.name
+                  } image ${
+                    idx + 1
+                  }" style="max-height:160px; object-fit:contain;">
+                  </div>`
+                )
+                .join("");
+
               el.innerHTML = `
                 <div class="catalog-title">${v.name}</div>
-                <div class="catalog-sub">${v.description}</div>
-                <div class="catalog-image-wrap">
-                  <img src="${v.image}" alt="${v.name}" />
+                <div class="catalog-sub">${v.type} · ${v.seats} plazas</div>
+                <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">${carouselItems}</div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                  </button>
                 </div>
-                <div class="catalog-dots"><span class="active"></span><span></span><span></span></div>
+                <div class="catalog-dots" aria-hidden="true">${images
+                  .map(
+                    (_, i) => `<span class="${i === 0 ? "active" : ""}"></span>`
+                  )
+                  .join("")}</div>
                 <div>
                   <a class="btn-reserve" href="/pages/renta-por-dia.html?vehicle=${encodeURIComponent(
                     v.id
                   )}">Reservar ahora</a>
                 </div>
-                <a class="catalog-details" href="/pages/renta-por-dia.html?vehicle=${encodeURIComponent(
+                <button class="catalog-details btn btn-link" data-vehicle-id="${
                   v.id
-                )}">Mostrar detalles</a>
+                }">Mostrar detalles</button>
                 <div class="catalog-disclaimer">*Su reserva garantiza uno de los modelos de vehículos arriba, sujeto a disponibilidad de la agencia.</div>
               `;
               catalogEl.appendChild(el);
+            });
+
+            // attach details modal triggers
+            document.querySelectorAll(".catalog-details").forEach((btn) => {
+              btn.addEventListener("click", (e) => {
+                const vid = e.currentTarget.getAttribute("data-vehicle-id");
+                openVehicleModal(vid);
+              });
             });
           })
           .catch((err) => {
@@ -167,6 +209,77 @@
             catalogEl.innerHTML =
               '<p class="text-danger">Error cargando catálogo.</p>';
           });
+
+        // create modal element (append to body)
+        const modalHtml = `
+        <div class="modal fade" id="vehicleModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="vehicleModalLabel">Detalles del vehículo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div id="vehicleModalCarousel" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner" id="vehicleModalCarouselInner"></div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#vehicleModalCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Anterior</span></button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#vehicleModalCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Siguiente</span></button>
+                </div>
+                <div class="mt-3">
+                  <h5 id="vehicleModalName"></h5>
+                  <p id="vehicleModalType" class="text-muted"></p>
+                  <p id="vehicleModalDesc"></p>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <div class="me-auto"><strong id="vehicleModalPrice"></strong></div>
+                <a id="vehicleModalReserve" class="btn btn-success">Reservar</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>`;
+        document.body.insertAdjacentHTML("beforeend", modalHtml);
+
+        // modal helper
+        function openVehicleModal(vehicleId) {
+          const list = window._vehicleList || [];
+          const v = list.find((x) => x.id === vehicleId);
+          if (!v) return;
+          document.getElementById("vehicleModalLabel").innerText = v.name;
+          document.getElementById("vehicleModalName").innerText = v.name;
+          document.getElementById(
+            "vehicleModalType"
+          ).innerText = `${v.type} · ${v.seats} plazas`;
+          document.getElementById("vehicleModalDesc").innerText = v.description;
+          document.getElementById(
+            "vehicleModalPrice"
+          ).innerText = `$${v.price_per_day}/día`;
+          document
+            .getElementById("vehicleModalReserve")
+            .setAttribute(
+              "href",
+              "/pages/renta-por-dia.html?vehicle=" + encodeURIComponent(v.id)
+            );
+
+          const inner = document.getElementById("vehicleModalCarouselInner");
+          inner.innerHTML = (v.images || [])
+            .map(
+              (src, idx) =>
+                `\n            <div class="carousel-item ${
+                  idx === 0 ? "active" : ""
+                }">\n              <img src="${src}" class="d-block w-100" alt="${
+                  v.name
+                } ${
+                  idx + 1
+                }" style="max-height:360px; object-fit:contain;">\n            </div>`
+            )
+            .join("");
+
+          const modalEl = document.getElementById("vehicleModal");
+          const modal = new bootstrap.Modal(modalEl);
+          modal.show();
+        }
       })();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

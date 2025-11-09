@@ -5,7 +5,7 @@
     "type": "Sedán",
     "seats": 5,
     "price_per_day": 35,
-  "image": "/Imagenes/car_sedan.svg",
+    "images": ["/Imagenes/car_sedan.svg", "/Imagenes/car_sedan.svg", "/Imagenes/car_sedan.svg"],
     "description": "Económico y eficiente — ideal para ciudad y viajes cortos."
   },
   {
@@ -14,7 +14,7 @@
     "type": "SUV",
     "seats": 7,
     "price_per_day": 60,
-  "image": "/Imagenes/car_suv.svg",
+    "images": ["/Imagenes/car_suv.svg", "/Imagenes/car_suv.svg", "/Imagenes/car_suv.svg"],
     "description": "Espacioso, cómodo, perfecto para familia y viajes largos."
   },
   {
@@ -23,7 +23,7 @@
     "type": "Compacto",
     "seats": 4,
     "price_per_day": 28,
-  "image": "/Imagenes/car_compact.svg",
+    "images": ["/Imagenes/car_compact.svg", "/Imagenes/car_compact.svg", "/Imagenes/car_compact.svg"],
     "description": "Maniobrable, bajo consumo y fácil de estacionar."
   }
 ]

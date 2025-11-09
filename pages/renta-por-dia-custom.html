@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Renta por Día - RentaAutos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles-modern.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="fixed-top bg-white shadow-sm">
+      <div class="container py-2">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <a
+              class="navbar-brand d-flex align-items-center"
+              href="../index.html"
+            >
+              <img
+                src="../Imagenes/Logo_Renta.jpg"
+                alt="Logo RentaAutos"
+                class="logo-img me-2"
+              />
+              <span class="fw-bold text-success">RentaAutos</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pt-5 mt-5">
+      <div class="container py-5">
+        <h1 class="text-center mb-4">Reserva por día</h1>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card p-3 mb-3">
+              <div id="selectedVehicleArea">
+                <h5 id="selVehicleName">Seleccione un vehículo</h5>
+                <p id="selVehicleType" class="text-muted small"></p>
+                <div
+                  id="selVehicleImage"
+                  style="
+                    max-height: 220px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                ></div>
+                <p id="selVehicleDesc" class="mt-2 text-muted"></p>
+                <div id="selVehiclePrice" class="fw-bold mt-2"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card p-3">
+              <form id="rentForm">
+                <input type="hidden" name="user_id" id="formUserId" />
+                <input type="hidden" name="vehicle_type" id="formVehicleType" />
+                <div class="mb-3">
+                  <label class="form-label">Fecha inicio</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="pickup_date"
+                    id="pickupDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Fecha fin</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="return_date"
+                    id="returnDate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Precio por día</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="pricePerDay"
+                    readonly
+                  />
+                </div>
+                <button class="btn btn-success w-100" type="submit">
+                  Confirmar reserva
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        function qs(key) {
+          const params = new URLSearchParams(location.search);
+          return params.get(key);
+        }
+        const vehicleId =
+          qs("vehicle") || sessionStorage.getItem("prefill_vehicle");
+        const auth = JSON.parse(sessionStorage.getItem("auth") || "null");
+        if (auth && auth.user)
+          document.getElementById("formUserId").value = auth.user.id;
+
+        if (vehicleId) {
+          fetch("/data/vehicles.json")
+            .then((r) => r.json())
+            .then((list) => {
+              const v = (list || []).find((x) => x.id === vehicleId);
+              if (!v) return;
+              document.getElementById("selVehicleName").innerText = v.name;
+              document.getElementById(
+                "selVehicleType"
+              ).innerText = `${v.type} · ${v.seats} plazas`;
+              document.getElementById("selVehicleDesc").innerText =
+                v.description;
+              document.getElementById(
+                "selVehiclePrice"
+              ).innerText = `$${v.price_per_day}/día`;
+              document.getElementById(
+                "pricePerDay"
+              ).value = `$${v.price_per_day}`;
+              document.getElementById("formVehicleType").value = v.id;
+              const imgWrap = document.getElementById("selVehicleImage");
+              imgWrap.innerHTML = "";
+              const img = document.createElement("img");
+              img.src =
+                (v.images && v.images[0]) ||
+                v.image ||
+                "/Imagenes/Carro_principal.webp";
+              img.style.maxHeight = "200px";
+              img.style.width = "auto";
+              imgWrap.appendChild(img);
+            })
+            .catch((e) => console.error(e));
+        }
+
+        document
+          .getElementById("rentForm")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const user_id = document.getElementById("formUserId").value;
+            const vehicle_type =
+              document.getElementById("formVehicleType").value || qs("vehicle");
+            const pickup_date = document.getElementById("pickupDate").value;
+            const return_date = document.getElementById("returnDate").value;
+            if (!user_id) {
+              alert("Debes iniciar sesión para reservar");
+              return;
+            }
+            if (!vehicle_type || !pickup_date || !return_date) {
+              alert("Completa fechas y vehículo");
+              return;
+            }
+            try {
+              const res = await fetch("/api/reservations", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  user_id,
+                  vehicle_type,
+                  pickup_date,
+                  return_date,
+                }),
+              });
+              if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                alert(err.error || "Error creando reserva");
+                return;
+              }
+              const data = await res.json();
+              alert("Reserva creada. ID: " + data.id);
+              window.location.href = "/pages/user.html";
+            } catch (err) {
+              console.error(err);
+              alert("Error creando reserva");
+            }
+          });
+      })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
