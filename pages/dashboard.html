@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dashboard - RentaAutos</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/">RentaAutos</a>
+        <div class="ms-auto">
+          <button id="btnBack" class="btn btn-outline-secondary">Volver</button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4">
+      <h1 id="title">Dashboard</h1>
+      <p id="subtitle" class="text-muted">Cargando...</p>
+
+      <div id="content"></div>
+    </main>
+
+    <script>
+      (function () {
+        const auth = JSON.parse(sessionStorage.getItem("auth") || "null");
+        if (!auth || !auth.token) {
+          // no autenticado -> redirigir al inicio
+          window.location.href = "/";
+          return;
+        }
+
+        document
+          .getElementById("btnBack")
+          .addEventListener("click", () => (window.location.href = "/"));
+
+        const title = document.getElementById("title");
+        const subtitle = document.getElementById("subtitle");
+        const content = document.getElementById("content");
+
+        title.innerText = `Bienvenido, ${auth.user.nombre}`;
+        subtitle.innerText = `Rol: ${auth.user.rol} · ${auth.user.email}`;
+
+        if (auth.user.rol === "admin") {
+          // Mostrar lista de usuarios
+          content.innerHTML = "<p>Cargando usuarios...</p>";
+          fetch("/api/usuarios", {
+            headers: { Authorization: "Bearer " + auth.token },
+          })
+            .then((r) => r.json())
+            .then((rows) => {
+              if (!Array.isArray(rows))
+                return (content.innerHTML = "<p>Error cargando usuarios</p>");
+              if (!rows.length)
+                return (content.innerHTML =
+                  "<p>No hay usuarios registrados.</p>");
+              const table = document.createElement("table");
+              table.className = "table table-striped";
+              table.innerHTML =
+                "<thead><tr><th>ID</th><th>Nombre</th><th>Email</th><th>Fecha registro</th></tr></thead>" +
+                "<tbody>" +
+                rows
+                  .map(
+                    (u) =>
+                      `<tr><td>${u.id}</td><td>${u.nombre}</td><td>${u.email}</td><td>${u.fecha_registro}</td></tr>`
+                  )
+                  .join("") +
+                "</tbody>";
+              content.innerHTML = "";
+              content.appendChild(table);
+            })
+            .catch((err) => {
+              console.error(err);
+              content.innerHTML =
+                '<p class="text-danger">Error cargando usuarios.</p>';
+            });
+        } else {
+          // Mostrar reservas del usuario
+          content.innerHTML = "<p>Cargando tus reservas...</p>";
+          fetch(
+            `/api/reservations?user_id=${encodeURIComponent(auth.user.id)}`,
+            { headers: { Authorization: "Bearer " + auth.token } }
+          )
+            .then((r) => {
+              if (!r.ok) throw new Error("Error");
+              return r.json();
+            })
+            .then((rows) => {
+              if (!rows.length)
+                return (content.innerHTML = "<p>No tienes reservas.</p>");
+              content.innerHTML = rows
+                .map(
+                  (r) => `
+                <div class="card mb-2">
+                  <div class="card-body">
+                    <h5 class="card-title">Reserva #${r.id} — ${
+                    r.vehicle_type
+                  }</h5>
+                    <p class="text-muted">${r.pickup_date} → ${
+                    r.return_date
+                  } · ${r.status}</p>
+                    <p>Precio: ${r.price || "-"}</p>
+                  </div>
+                </div>
+              `
+                )
+                .join("");
+            })
+            .catch((err) => {
+              console.error(err);
+              content.innerHTML =
+                '<p class="text-danger">Error cargando reservas.</p>';
+            });
+        }
+      })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

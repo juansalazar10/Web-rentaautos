@@ -74,18 +74,123 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     if (!loginForm) return;
 
-    loginForm.addEventListener('submit', function(e) {
-        // Prevenir comportamiento por defecto (evita recarga y posibles delays)
+    // Login real: enviar credenciales a /api/login y guardar token en sessionStorage
+    loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        if (!email || !password) {
+            alert('Por favor completa email y contraseña');
+            return;
+        }
 
-        // Aquí el formulario de login en el modal originalmente era UI-only.
-        // Como estamos usando Firebase Auth con Google, cerramos la modal y
-        // recomendamos usar el botón "Entrar con Google" en su lugar.
-        const loginModalEl = document.getElementById('loginModal');
-        if (loginModalEl) {
-            const modalInstance = bootstrap.Modal.getOrCreateInstance(loginModalEl);
-            modalInstance.hide();
+        try {
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                alert(err.error || 'Error al iniciar sesión');
+                return;
+            }
+
+            const data = await res.json();
+            // guardar token y user en sessionStorage (temporal para SPA)
+            sessionStorage.setItem('auth', JSON.stringify({ token: data.token, user: data.user }));
+
+            // ocultar modal
+            const loginModalEl = document.getElementById('loginModal');
+            if (loginModalEl) {
+                const modalInstance = bootstrap.Modal.getOrCreateInstance(loginModalEl);
+                modalInstance.hide();
+            }
+
+            // actualizar UI y redirigir al dashboard
+            updateUIForAuth();
+            window.location.href = '/pages/dashboard.html';
+        } catch (err) {
+            console.error('Login error', err);
+            alert('Error intentando iniciar sesión');
         }
     });
 
+    // Sign out
+    const btnSignOut = document.getElementById('btnSignOut');
+    if (btnSignOut) {
+        btnSignOut.addEventListener('click', async function() {
+            sessionStorage.removeItem('auth');
+            updateUIForAuth();
+            // call optional logout endpoint
+            try { await fetch('/api/logout', { method: 'POST' }); } catch(e){}
+        });
+    }
+
+    // Mis reservas: abrir modal y cargar reservas del usuario
+    const btnMyReservations = document.getElementById('btnMyReservations');
+    if (btnMyReservations) {
+        btnMyReservations.addEventListener('click', async function() {
+            const auth = JSON.parse(sessionStorage.getItem('auth') || 'null');
+            if (!auth || !auth.user) {
+                alert('Debes iniciar sesión para ver tus reservas');
+                return;
+            }
+            const modalEl = document.getElementById('reservationsModal');
+            const modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
+            modalInstance.show();
+
+            const listEl = document.getElementById('reservationsList');
+            listEl.innerHTML = '<p class="text-muted">Cargando reservas...</p>';
+
+            try {
+                const res = await fetch(`/api/reservations?user_id=${encodeURIComponent(auth.user.id)}`, {
+                    headers: { 'Authorization': 'Bearer ' + auth.token }
+                });
+                if (!res.ok) throw new Error('Error cargando reservas');
+                const rows = await res.json();
+                if (!rows.length) {
+                    listEl.innerHTML = '<p class="text-muted">No tienes reservas.</p>';
+                    return;
+                }
+                const html = rows.map(r => `
+                    <div class="card mb-2">
+                      <div class="card-body">
+                        <h6 class="card-title">Reserva #${r.id} — ${r.vehicle_type}</h6>
+                        <p class="card-text small text-muted">${r.pickup_date} → ${r.return_date} · ${r.status}</p>
+                        <p class="mb-0">Precio: ${r.price || '-'} </p>
+                      </div>
+                    </div>
+                `).join('');
+                listEl.innerHTML = html;
+            } catch (err) {
+                console.error(err);
+                listEl.innerHTML = '<p class="text-danger">Error cargando reservas.</p>';
+            }
+        });
+    }
+
+    // Al cargar la página, actualizar UI según sesión
+    updateUIForAuth();
+
+
+// Helper: mostrar/ocultar botones según sesión
+function updateUIForAuth() {
+    const auth = JSON.parse(sessionStorage.getItem('auth') || 'null');
+    const btnMyReservations = document.getElementById('btnMyReservations');
+    const btnSignOut = document.getElementById('btnSignOut');
+    const loginButtons = document.querySelectorAll('[data-bs-target="#loginModal"], #loginModal');
+
+    if (auth && auth.user) {
+        if (btnMyReservations) btnMyReservations.classList.remove('d-none');
+        if (btnSignOut) btnSignOut.classList.remove('d-none');
+        // hide login triggers
+        loginButtons.forEach(el => el.classList && el.classList.add('d-none'));
+    } else {
+        if (btnMyReservations) btnMyReservations.classList.add('d-none');
+        if (btnSignOut) btnSignOut.classList.add('d-none');
+        loginButtons.forEach(el => el.classList && el.classList.remove('d-none'));
+    }
+}
 });

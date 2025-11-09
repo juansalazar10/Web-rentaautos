@@ -9,6 +9,8 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-prod';
 
 // API health
 app.get('/api/health', (req, res) => res.json({ ok: true }));
@@ -49,6 +51,50 @@ app.get('/api/usuarios', async (req, res) => {
     console.error('Error listando usuarios', err);
     return res.status(500).json({ error: 'Error interno' });
   }
+});
+
+// Login: verificar credenciales y emitir JWT
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body || {};
+  if (!email || !password) return res.status(400).json({ error: 'Email y contraseña requeridos' });
+
+  try {
+    const q = 'SELECT id, nombre, email, "contraseña", rol FROM usuarios WHERE email = $1 LIMIT 1';
+    const r = await query(q, [email]);
+    if (r.rowCount === 0) return res.status(401).json({ error: 'Credenciales inválidas' });
+
+    const user = r.rows[0];
+    const match = bcrypt.compareSync(password, user.contraseña);
+    if (!match) return res.status(401).json({ error: 'Credenciales inválidas' });
+
+    const payload = { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol };
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
+
+    // devolver token y usuario (frontend lo guardará en sessionStorage)
+    return res.json({ token, user: payload });
+  } catch (err) {
+    console.error('Error en login', err);
+    return res.status(500).json({ error: 'Error interno' });
+  }
+});
+
+// Obtener información del usuario a partir del token (Authorization: Bearer <token>)
+app.get('/api/me', (req, res) => {
+  try {
+    const auth = req.headers.authorization || '';
+    const parts = auth.split(' ');
+    if (parts.length !== 2 || parts[0] !== 'Bearer') return res.status(401).json({ error: 'No autorizado' });
+    const token = parts[1];
+    const decoded = jwt.verify(token, JWT_SECRET);
+    return res.json({ user: decoded });
+  } catch (err) {
+    return res.status(401).json({ error: 'Token inválido o expirado' });
+  }
+});
+
+// Logout (cliente puede simplemente eliminar token). Añadimos endpoint opcional por conveniencia.
+app.post('/api/logout', (req, res) => {
+  return res.json({ ok: true });
 });
 
 // Servir archivos estáticos del frontend (raíz del proyecto)
