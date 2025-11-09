@@ -1,0 +1,29 @@
+[
+  {
+    "id": "sedan-a",
+    "name": "Sedán Compacto",
+    "type": "Sedán",
+    "seats": 5,
+    "price_per_day": 35,
+    "image": "/Imagenes/Carro_principal.webp",
+    "description": "Económico y eficiente — ideal para ciudad y viajes cortos."
+  },
+  {
+    "id": "suv-x",
+    "name": "SUV Familiar",
+    "type": "SUV",
+    "seats": 7,
+    "price_per_day": 60,
+    "image": "/Imagenes/Carro_principal.webp",
+    "description": "Espacioso, cómodo, perfecto para familia y viajes largos."
+  },
+  {
+    "id": "compact-z",
+    "name": "Compacto Z",
+    "type": "Compacto",
+    "seats": 4,
+    "price_per_day": 28,
+    "image": "/Imagenes/Carro_principal.webp",
+    "description": "Maniobrable, bajo consumo y fácil de estacionar."
+  }
+]
