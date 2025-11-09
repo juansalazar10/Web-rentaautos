@@ -1,36 +1,97 @@
-/* User dashboard styles */
-:root{
-  --ua-primary: #2fa84f;
-  --ua-dark: #23823a;
-  --ua-bg: #fbfdfb;
-  --ua-card: #ffffff;
-  --ua-muted: #6b7280;
+/* Modern user dashboard styles (green theme to match admin) */
+:root {
+  --primary: #28a745;
+  --primary-600: #218838;
+  --bg: #fbfdfb;
+  --card-bg: #ffffff;
+  --muted: #6c757d;
+  --glass: rgba(255,255,255,0.6);
 }
 
-body{
-  background: linear-gradient(180deg, var(--ua-bg), #f4faf4);
+/* Page background */
+body {
+  background: linear-gradient(180deg, #fbfdfb 0%, #f4f9f4 100%);
   color: #12321a;
+  -webkit-font-smoothing:antialiased;
 }
 
-.navbar.user-nav{
-  background: linear-gradient(90deg,var(--ua-primary),var(--ua-primary));
-  box-shadow: 0 6px 20px rgba(18,50,26,0.08);
-  padding: .5rem 1rem;
+/* Navbar (user) */
+.navbar.user-nav {
+  background: linear-gradient(90deg, var(--primary), var(--primary));
+  box-shadow: 0 8px 24px rgba(40,167,69,0.08);
+  padding: 0.6rem 1rem;
+  min-height: 64px;
+}
+.navbar.user-nav .navbar-brand { color: #fff; font-weight: 800; letter-spacing: -0.2px; }
+.navbar.user-nav .btn-light {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: .35rem .6rem;
+  border-radius: 10px;
 }
 
-.navbar.user-nav .navbar-brand{ color:#fff; font-weight:700; }
+/* Profile card */
+.card.user-profile {
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--card-bg), #fbfffb);
+  box-shadow: 0 10px 30px rgba(17,24,17,0.05);
+  border: 1px solid rgba(34,139,34,0.04);
+}
+.user-profile .profile-avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  color: var(--primary-600);
+  background: linear-gradient(180deg,#fff,#f6fff6);
+  border: 3px solid rgba(255,255,255,0.85);
+}
+.user-profile h5 { font-weight:700; margin-bottom:4px; }
+.muted-small { color: var(--muted); }
 
-.card.user-profile{ border-radius:14px; box-shadow:0 8px 24px rgba(17,24,17,0.05); border:1px solid rgba(34,139,34,0.04); }
+/* Action card */
+.card.user-actions { border-radius: 12px; box-shadow: 0 8px 20px rgba(18,50,26,0.03); }
+.card.user-actions .btn { border-radius: 10px; }
 
-.profile-avatar{ width:84px; height:84px; border-radius:50%; background:linear-gradient(180deg,#fff,#f3fff3); border:3px solid rgba(255,255,255,0.7); display:flex; align-items:center; justify-content:center; font-size:26px; color:var(--ua-dark); }
+/* Reservations list */
+#reservationsArea .reservation-card {
+  border-radius: 12px;
+  overflow: hidden;
+  display:flex;
+  align-items:stretch;
+  border: 1px solid rgba(34,139,34,0.05);
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(12,30,12,0.03);
+  margin-bottom: 12px;
+}
+.reservation-card .left-accent {
+  width:6px; background: linear-gradient(180deg,var(--primary), var(--primary-600));
+}
+.reservation-card .res-body { padding: 14px; flex:1; }
+.reservation-card h6 { margin-bottom:6px; font-weight:700; }
+.reservation-meta { color: var(--muted); font-size: .9rem; }
+.reservation-actions { padding: 12px; display:flex; align-items:center; gap:8px; }
+.badge-status { padding: .35rem .6rem; border-radius: 999px; font-weight:700; font-size:.85rem; }
+.badge-confirmed { background: rgba(40,167,69,0.12); color: var(--primary-600); border: 1px solid rgba(40,167,69,0.06); }
+.badge-cancelled { background: rgba(220,53,69,0.08); color: #c82333; }
 
-.card.user-actions .btn{ border-radius:10px; }
+/* Empty state */
+.empty-state { padding: 28px; text-align:center; color:var(--muted); background: linear-gradient(180deg,#fff,#fbfffb); border-radius:12px; border:1px dashed rgba(34,139,34,0.04); }
 
-/* reservation cards */
-#reservationsArea .card{ border-radius:12px; border:1px solid rgba(34,139,34,0.04); }
-
-@media (max-width:767.98px){
-  .profile-avatar{ width:64px; height:64px; font-size:20px; }
+/* Responsive */
+@media (max-width: 767.98px) {
+  .user-profile .profile-avatar { width: 64px; height:64px; font-size:20px; }
+  #reservationsArea .reservation-card { flex-direction: column; }
+  .reservation-actions { justify-content: flex-end; padding: 10px; }
 }
 
-.muted-small{ color:var(--ua-muted); }
+/* small improvements to buttons */
+.btn-success { background: linear-gradient(180deg,var(--primary),var(--primary-600)); border: none; }
+.btn-outline-secondary { border-radius: 10px; }
+
+/* subtle helper */
+.text-muted-2 { color: rgba(18,50,26,0.45); }
