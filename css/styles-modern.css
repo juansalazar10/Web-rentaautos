@@ -2,11 +2,12 @@
    VARIABLES MODERNAS
    ==================================== */
 :root {
-    --primary-color: #28a745;
-    --primary-hover: #218838;
-    --primary-light: #34d058;
+    --primary-color: #11623a;
+    --primary-hover: #0e4f2f;
+    --primary-light: #149151;
+    --primary-dark: #0b4d2d;
     --dark: #1a1a1a;
-    --dark-soft: #2d3436;
+    --dark-soft: #22272a;
     --light: #f8f9fa;
     --gray-100: #f1f3f5;
     --gray-200: #e9ecef;
@@ -76,21 +77,29 @@ body {
 }
 
 .btn-success {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
+    color: #fff !important;
     border: none;
     box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
 }
 
+.btn-success:hover,
+.btn-success:focus {
+    background-color: #083b23 !important;
+    border-color: #083b23 !important;
+}
+
 .btn-outline-success {
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 2px solid var(--primary-dark);
+    color: var(--primary-dark);
     background: transparent;
 }
 
 .btn-outline-success:hover {
-    background: var(--primary-color);
+    background: var(--primary-dark);
     color: white;
-    border-color: var(--primary-color);
+    border-color: var(--primary-dark);
 }
 
 /* ====================================
@@ -244,6 +253,9 @@ header .container-fluid {
     50% { opacity: 0.8; }
 }
 
+/* Evitar pseudo-elemento que interfiere con detección de contraste */
+.hero::before { display: none; }
+
 .hero .container {
     position: relative;
     z-index: 2;
@@ -341,12 +353,21 @@ section h2::after {
     border-radius: 20px;
     overflow: hidden;
     background: white;
+    content-visibility: auto;
+    contain-intrinsic-size: 300px 400px;
     box-shadow: var(--shadow-sm);
 }
 
-.vehicle-card:hover {
+.vehicle-card:hover,
+.vehicle-card:focus-within {
     transform: translateY(-12px);
     box-shadow: var(--shadow-xl);
+}
+
+/* Indicador adicional de foco para usuarios de teclado */
+.vehicle-card:focus-within {
+    outline: 3px solid #0b4d2d;
+    outline-offset: 4px;
 }
 
 .vehicle-card .card-img-top {
@@ -355,7 +376,8 @@ section h2::after {
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.vehicle-card:hover .card-img-top {
+.vehicle-card:hover .card-img-top,
+.vehicle-card:focus-within .card-img-top {
     transform: scale(1.1);
 }
 
@@ -415,14 +437,23 @@ section h2::after {
     transition: transform 0.4s ease;
 }
 
-.branch-card:hover::before {
+.branch-card:hover::before,
+.branch-card:focus-within::before {
     transform: scaleX(1);
 }
 
-.branch-card:hover {
+.branch-card:hover,
+.branch-card:focus-within {
     transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
 }
+
+/* Indicador de foco para navegación por teclado en branch-card */
+.branch-card:focus-within {
+    outline: 3px solid #0b4d2d;
+    outline-offset: 4px;
+}
+
 
 .branch-card .card-body {
     padding: 2rem;
@@ -446,29 +477,28 @@ section h2::after {
     overflow: hidden;
     background: white;
     position: relative;
+    content-visibility: auto;
+    contain-intrinsic-size: 300px 400px;
 }
 
-.pricing-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(52, 208, 88, 0.05));
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 0;
-}
+/* Eliminado overlay pseudo-element para claridad de contraste */
+.pricing-card::before { display: none; }
 
 .pricing-card:hover::before {
     opacity: 1;
 }
 
-.pricing-card:hover {
+.pricing-card:hover,
+.pricing-card:focus-within {
     transform: translateY(-12px) scale(1.02);
     box-shadow: var(--shadow-xl);
     border-color: var(--primary-color);
+}
+
+/* Indicador de foco para pricing-card */
+.pricing-card:focus-within {
+    outline: 3px solid #0b4d2d;
+    outline-offset: 4px;
 }
 
 .pricing-card .card-header {
@@ -532,8 +562,23 @@ section h2::after {
    FOOTER MODERNO
    ==================================== */
 footer {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d3436 100%);
+    background-color: #1a1a1a;
     position: relative;
+}
+
+/* Mejorar contrastes en footer */
+footer .text-success { color: #ffffff !important; }
+footer .text-white-50 { color: #d1d5db !important; }
+
+/* Evitar pseudo-elemento que afecta cálculo de contraste */
+.branch-card::before { display: none; }
+
+/* Forzar contraste suficiente en textos explicativos */
+#flota .text-muted,
+#tarifas .text-muted,
+#services .text-muted,
+#sucursales .text-muted {
+    color: #2a2f34 !important;
 }
 
 footer::before {
@@ -608,7 +653,202 @@ html {
 
 .skip-link:focus {
     transform: translateY(0);
-    outline: 3px solid rgba(255,255,255,0.12);
+    outline: 3px solid #ffffff;
+    box-shadow: 0 0 0 4px rgba(40,167,69,0.12);
+}
+
+/* Ensure keyboard focus on navigation is visible and not only color-based */
+.navbar-nav .nav-link:focus-visible {
+    outline: 3px solid rgba(40,167,69,0.16);
+    text-decoration: underline;
+    background-color: rgba(11,77,45,0.08);
+    border-radius: 6px;
+}
+
+/* Hover consistente para enlaces de navegación */
+.navbar-nav .nav-link:hover {
+    background-color: rgba(11,77,45,0.05);
+    border-radius: 6px;
+    text-decoration: underline;
+}
+
+/* Estilos de foco visibles y consistentes para elementos interactivos */
+:where(a, button, .btn, [role="button"], .form-control, .form-select):focus-visible {
+    outline: 3px solid #0b4d2d;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(11,77,45,0.2);
+}
+
+/* Indicadores visuales para enlaces interactivos (hover y focus coordinados) */
+a:not(.btn):hover,
+a:not(.btn):focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+/* Mejorar feedback visual en botones para navegación por teclado */
+.btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(11,77,45,0.3), 0 0 0 4px rgba(11,77,45,0.2) !important;
+}
+
+/* ====================================
+   VALIDACIÓN DE FORMULARIOS (WCAG 2.1 - Comprensible)
+   ==================================== */
+
+/* Estilos para campos inválidos */
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #dc3545 !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+    padding-right: calc(1.5em + .75rem);
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Mensajes de error */
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #dc3545;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+    border-radius: 0.375rem;
+    position: relative;
+}
+
+.invalid-feedback::before {
+    content: '⚠ ';
+    font-weight: bold;
+    margin-right: 0.25rem;
+}
+
+/* Mostrar mensaje cuando el campo es inválido */
+.form-control.is-invalid ~ .invalid-feedback,
+.form-select.is-invalid ~ .invalid-feedback {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilos para campos válidos (feedback positivo) */
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: #198754 !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+    padding-right: calc(1.5em + .75rem);
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+/* Texto de ayuda bajo los campos */
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Asterisco de campo requerido */
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/* Alert de instrucciones del formulario */
+.alert-info {
+    background-color: #cfe2ff;
+    border-color: #b6d4fe;
+    color: #084298;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    color: #842029;
+}
+
+/* Mejorar contraste en labels de formulario */
+.form-label {
+    font-weight: 600;
+    color: var(--dark-soft);
+    margin-bottom: 0.5rem;
+}
+
+/* Focus mejorado en campos de formulario */
+.form-control:focus,
+.form-select:focus {
+    border-color: #0b4d2d;
+    box-shadow: 0 0 0 0.25rem rgba(11, 77, 45, 0.25);
+}
+
+/* Forzar color oscuro de botones success en contextos clave para contraste */
+.vehicle-card .btn-success,
+.pricing-card .btn-success,
+#services .btn-success,
+.reservation-form .btn-success {
+    background-color: #0b4d2d !important;
+    border-color: #0b4d2d !important;
+    color: #ffffff !important;
+}
+
+/* Asegurar foco claro dentro de modales */
+.modal-body .form-control:focus-visible,
+.modal-body .btn:focus-visible {
+    outline: 3px solid #0b4d2d;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(11,77,45,0.2);
+}
+
+/* Indicadores visuales para enlaces interactivos (hover y focus coordinados) */
+a:not(.btn):hover,
+a:not(.btn):focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+/* Mejorar feedback visual en botones para navegación por teclado */
+.btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(11,77,45,0.3), 0 0 0 4px rgba(11,77,45,0.2) !important;
+}
+
+/* Cards de vehículos: hacer título clickeable y accesible por teclado */
+.vehicle-card .card-title,
+.branch-card .card-title,
+.pricing-card .card-header {
+    transition: color 0.2s ease;
+}
+
+.vehicle-card:hover .card-title,
+.vehicle-card:focus-within .card-title {
+    color: #0b4d2d;
+}
+
+/* Mejorar accesibilidad de iconos con efecto hover */
+.feature-item:hover,
+.feature-item:focus-within {
+    transform: translateX(4px);
+    transition: transform 0.2s ease;
 }
 
 /* Formulario de reserva en hero (estilo compacto) */
@@ -625,7 +865,7 @@ html {
    UTILIDADES
    ==================================== */
 .text-success {
-    color: var(--primary-color) !important;
+    color: var(--primary-dark) !important;
 }
 
 .bg-success {
@@ -712,6 +952,9 @@ html {
     box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
 }
 
+/* Asegurar contraste en badge warning */
+.badge.bg-warning, .badge.bg-warning.text-dark { color: #111827 !important; }
+
 /* Alertas modernas */
 .alert {
     border-radius: 16px;
@@ -720,8 +963,14 @@ html {
 }
 
 .alert-info {
-    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
+    background-color: #e8f4fb;
     border-left: 4px solid #3498db;
+}
+
+.alert-info,
+.alert-info li,
+.alert-info .alert-heading {
+    color: #1c3f4b !important;
 }
 
 /* Feature items en hero */
@@ -763,7 +1012,12 @@ header .btn {
 
 /* Mejor contraste para texto muted */
 .text-muted {
-    color: #6c757d !important;
+    color: #30363a !important;
+}
+
+/* Asegurar contraste suficiente en fondos claros */
+.bg-light .text-muted {
+    color: #2b3136 !important;
 }
 
 /* Sombra suave para imágenes */
@@ -823,6 +1077,7 @@ header .btn {
 
 .modal-header {
     padding: 1.25rem 1.5rem;
+    background-color: rgba(40,167,69,0.95);
     background: linear-gradient(90deg, rgba(40,167,69,0.95), rgba(52,208,88,0.95));
     color: #fff;
     border-bottom: none;

@@ -5,7 +5,10 @@
   "description": "Static frontend for Renta Autos - start script to run node static server",
   "scripts": {
     "start": "node scripts/server.js --dir . --port 8000",
-    "api": "node server/index.js"
+    "api": "node server/index.js",
+    "min:css": "cleancss -o css/styles-modern.min.css css/styles-modern.css",
+    "min:js": "terser js/script.js -o js/script.min.js -c -m",
+    "build:assets": "npm run min:css && npm run min:js"
   },
   "engines": {
     "node": ">=18"
@@ -16,5 +19,9 @@
     "pg": "^8.16.3",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2",
+    "terser": "^5.36.0"
   }
 }

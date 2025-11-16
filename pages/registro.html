@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -33,7 +33,7 @@
             <div class="card-body">
               <h3 class="card-title text-center mb-2">Crea tu cuenta</h3>
               <p class="text-center text-muted mb-4">
-                Regístrate para reservar vehículos rápidamente
+                Regé­strate para reservar vehé­culos rápidamente
               </p>
               <form
                 action="#"
@@ -51,14 +51,14 @@
                     id="regName"
                     name="name"
                     class="form-control"
-                    placeholder="Juan Pérez"
+                    placeholder="Juan Pé©rez"
                     autofocus
                     required
                   />
                 </div>
                 <div class="mb-3">
                   <label for="regEmail" class="form-label"
-                    >Correo electrónico</label
+                    >Correo electré³nico</label
                   >
                   <input
                     type="email"
@@ -73,7 +73,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="regPassword" class="form-label">Contraseña</label>
+                  <label for="regPassword" class="form-label">Contraseé±a</label>
                   <div class="input-group">
                     <input
                       type="password"
@@ -93,12 +93,12 @@
                     </button>
                   </div>
                   <div class="form-text">
-                    Mínimo 6 caracteres. Evita usar contraseñas obvias.
+                    Mé­nimo 6 caracteres. Evita usar contraseé±as obvias.
                   </div>
                 </div>
                 <div class="mb-3">
                   <label for="regPassword2" class="form-label"
-                    >Confirmar contraseña</label
+                    >Confirmar contraseé±a</label
                   >
                   <div class="input-group">
                     <input
@@ -106,7 +106,7 @@
                       id="regPassword2"
                       name="password2"
                       class="form-control"
-                      placeholder="Vuelve a escribir la contraseña"
+                      placeholder="Vuelve a escribir la contraseé±a"
                       required
                       minlength="6"
                     />
@@ -143,7 +143,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      // Mejoras: toggles para mostrar/ocultar contraseña y feedback directo
+      // Mejoras: toggles para mostrar/ocultar contraseé±a y feedback directo
       document.querySelectorAll(".btn-toggle-password").forEach(function (btn) {
         btn.addEventListener("click", function () {
           const targetId = btn.getAttribute("data-target");
@@ -171,10 +171,10 @@
           return;
         }
         if (p1 === p2) {
-          passwordMatchEl.textContent = "Las contraseñas coinciden.";
+          passwordMatchEl.textContent = "Las contraseé±as coinciden.";
           passwordMatchEl.className = "form-text valid";
         } else {
-          passwordMatchEl.textContent = "Las contraseñas no coinciden.";
+          passwordMatchEl.textContent = "Las contraseé±as no coinciden.";
           passwordMatchEl.className = "form-text invalid";
         }
       }
@@ -200,7 +200,7 @@
         }
 
         if (p1 !== p2) {
-          passwordMatchEl.textContent = "Las contraseñas no coinciden.";
+          passwordMatchEl.textContent = "Las contraseé±as no coinciden.";
           passwordMatchEl.className = "form-text invalid";
           return;
         }
@@ -220,7 +220,7 @@
 
           if (res.status === 201) {
             const body = await res.json();
-            alert("Registro exitoso. Ya puedes iniciar sesión.");
+            alert("Registro exitoso. Ya puedes iniciar sesié³n.");
             // redirigir al inicio o al login modal
             window.location.href = "../index.html";
             return;
@@ -251,3 +251,4 @@
     </script>
   </body>
 </html>
+
